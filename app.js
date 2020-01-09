@@ -22,9 +22,10 @@ const careprovidersRouter = require('./routes/careproviders')
 const familiesRouter = require('./routes/families')
 const membersRouter = require('./routes/members')
 const medicationRouter = require('./routes/medications')
+// const indexRouter = require('./routes/index')
 
 
-app.use('/', indexRouter)
+// app.use('/', indexRouter)
 app.use('/careproviders', careprovidersRouter)
 app.use('/families', familiesRouter)
 app.use('/members', membersRouter)
