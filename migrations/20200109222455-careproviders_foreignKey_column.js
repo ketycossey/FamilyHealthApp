@@ -6,7 +6,7 @@ module.exports = {
     return queryInterface.addColumn('CareProviders','family_id',{
       type: Sequelize.INTEGER,
       references: {
-        model: 'family',
+        model: 'families',
         key: 'id'
       }
     })
