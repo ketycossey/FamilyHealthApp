@@ -12,10 +12,12 @@ router.post('/', async (req,res)=>{
         }
     })
     if(user != null){
-        bcrypt.compare(password, user.passwor, (error, result)=>{
+        bcrypt.compare(password, user.password, (error, result)=>{
             if(result){
                 if(require.session){
-                    req.session.user = {userId: family.id}
+                    req.session.userId = {userId: family.id}
+                    req.session.username = {username: family.username}
+                    req.session.isAuth = true
                     res.redirect('/index')
                 }
             }else{

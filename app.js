@@ -16,7 +16,22 @@ require('dotenv').config()
 const path = require('path')
 const VIEWS_PATH = path.join(__dirname,'/views')
 
+const session = require("express-session")
+app.use(session({
+    secret: "He who has a why to live can bear almost any how",
+    resave: false,
+    saveUninitialized: true
+}))
+
 global.models = require("./models")
+
+function auth(req,res,next) {
+    if(req.session.isAuth) {
+        next()
+    } else {
+        res.redirect("/")
+    }
+}
 
 
 app.use(bodyParser.urlencoded({extended: false}))
