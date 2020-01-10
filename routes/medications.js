@@ -14,7 +14,7 @@ console.log(medicineName)
 
   let medication= models.Medication.build({
   medicineName:medicineName,
-  //medImageUrl: uniqueFilename,
+  
   medDescription:medDescription,
   medFrequency: medFrequency
 })
@@ -28,14 +28,14 @@ if (persistedMedication !=null){
 })
 
 router.post('/edit-medicine', async (req, res)=>{
- //const medId = request.body.medId
+
   const medicineName = req.body.medicineName
   const medDescription = req.body.medDescription
   const medFrequency = req.body.medFrequency
 
 const result = await models.Medication.update({
   medicineName:medicineName,
-  //medImageUrl: uniqueFilename,
+  
   medDescription:medDescription,
   medFrequency: medFrequency
 },{where: {medicineName: medicineName}
