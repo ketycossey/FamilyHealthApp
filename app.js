@@ -13,7 +13,10 @@ require('dotenv').config()
 const path = require('path')
 const VIEWS_PATH = path.join(__dirname,'/views')
 
-global.models = require("./models")
+//global.models = require("./models")
+
+const models = require('./models')
+models.family.findAll().then(r => console.log(r))
 
 
 app.use(bodyParser.urlencoded({extended: false}))
