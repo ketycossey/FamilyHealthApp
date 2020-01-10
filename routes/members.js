@@ -24,11 +24,11 @@ router.post('/update/:memberId',(req,res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         birthday: req.body.birthday}, {
-        where: {
-            id: req.params.memberId
+            where: {
+                id: req.params.memberId
+            }
         }
     )
 })
-
 
 module.exports = router
