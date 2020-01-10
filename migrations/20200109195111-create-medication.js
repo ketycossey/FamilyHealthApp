@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      memberId:{
+        allowNull:false,
+        type:Sequelize.STRING,
+        references:{ model: 'family_Member', field:'id'}
+      },
       medicineName: {
         type: Sequelize.STRING
       },
