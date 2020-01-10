@@ -2,31 +2,33 @@ const express = require("express")
 const router = express.Router()
 
 
-app.post('/',(req,res) => {
+router.post('/',async (req,res) => {
 
-    const familyName = req.body.family_name 
-    const username = req.body.username
-    const password = req.body.password
-    const address = req.body.address
+    let familyName = req.body.family_name 
+    let username = req.body.username
+    let password = req.body.password
+    let address = req.body.address
 
-   modules.Family.findOne({
+    let persistedFamily= await models.family.findOne({
        where:{
-           username: username
+           familyName: familyName,
+           username:username,
+           address: address
        }
    })
-   if(persistedUser == null){
+   if(persistedFamily == null){
        bcrypt.hash(password, SALT_ROUNDS,async(error, hash)=>{
            if(error){
                res.render('/', {message: 'Error creating user!'})
            }else{
-            let family = models.Family.build({
+            let family = models.family.build({
                 familyName : familyName,
                 username : username,
                 address : address,
                 password: hash
             })
-            let savedUser = await family.save()
-            if(savedUser != null){
+            let savedFamily = await family.save()
+            if(savedFamily != null){
                 res.redirect('/login')
             }else{
                 res.render('/',{message: "User already exists!"})
@@ -38,7 +40,7 @@ app.post('/',(req,res) => {
    }   
 })
 
-app.get('/',(req,res) => {
+router.get('/',(req,res) => {
     res.render('register')
 })
 

@@ -1,26 +1,26 @@
 {
-  "development": {
-    "username": "boqfwiwn",
-    "password": "hCNm65WRr6_wPqvQThIg3qlh2T5M5dzZ",
-    "database": "boqfwiwn",
-    "host": "rajje.db.elephantsql.com",
-    "dialect": "postgres",
-    "operatorsAliases": false
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
-  },
-  "production": {
-    "username": "boqfwiwn",
-    "password": "hCNm65WRr6_wPqvQThIg3qlh2T5M5dzZ",
-    "database": "boqfwiwn",
-    "host": "rajje.db.elephantsql.com",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "development": {
+      "username": "boqfwiwn",
+      "password": "hCNm65WRr6_wPqvQThIg3qlh2T5M5dzZ",
+      "database": "boqfwiwn",
+      "host": "rajje.db.elephantsql.com",
+      "dialect": "postgres",
+      "operatorsAliases": false
+    },
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql",
+      "operatorsAliases": false
+    },
+    "production": {
+      "username": "boqfwiwn",
+      "password": "hCNm65WRr6_wPqvQThIg3qlh2T5M5dzZ",
+      "database": "boqfwiwn",
+      "host": "rajje.db.elephantsql.com",
+      "dialect": "postgres",
+      "operatorsAliases": false
+    }
   }
-}
