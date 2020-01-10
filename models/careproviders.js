@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
     website: DataTypes.STRING,
-    specialty: DataTypes.STRING
+    specialty: DataTypes.STRING,
+    member_id: DataTypes.INTEGER
   }, {});
   CareProviders.associate = function(models) {
     // associations can be defined here
