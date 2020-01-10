@@ -1,8 +1,10 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 router.get("/", (req, res) => {
-    models.CareProviders.findAll().then(providers => res.render("careproviders", {providers: providers}))
-})
+  models.CareProviders.findAll().then(providers =>
+    res.render("careproviders", { providers: providers })
+  );
+});
 
-module.exports = router
+module.exports = router;
