@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
+
 router.get("/", (req,res)=>{
-    models.families.findAll().then(families => res.render("family", {families: families}))
+    models.family.findAll().then(families => res.render("family", {families: families}))
 })
 
 
