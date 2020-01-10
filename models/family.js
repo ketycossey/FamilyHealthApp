@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {});
   family.associate = function(models) {
-    models.family.hasMany(models.family_members,{onDelete:'cascade',hooks:true})
+    models.family.hasMany(models.family_member,{onDelete:'cascade',hooks:true})
   
   };
   return family;
