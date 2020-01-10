@@ -28,7 +28,8 @@ if (persistedMedication !=null){
 })
 
 router.post('/edit-medicine', async (req, res)=>{
- const medicineName = req.body.medicineName
+ //const medId = request.body.medId
+  const medicineName = req.body.medicineName
   const medDescription = req.body.medDescription
   const medFrequency = req.body.medFrequency
 
@@ -37,7 +38,7 @@ const result = await models.Medication.update({
   //medImageUrl: uniqueFilename,
   medDescription:medDescription,
   medFrequency: medFrequency
-},{where: {id: medId}
+},{where: {medicineName: medicineName}
   
 })
 res.redirect('/medications')
