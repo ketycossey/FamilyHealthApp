@@ -20,6 +20,7 @@ const careprovidersRouter = require('./routes/careproviders')
 const familiesRouter = require('./routes/families')
 const membersRouter = require('./routes/members')
 const medicationRouter = require('./routes/medications')
+const registerRouter = require('./routes/register')
 
 
 app.use('/', indexRouter)
@@ -27,6 +28,13 @@ app.use('/careproviders', careprovidersRouter)
 app.use('/families', familiesRouter)
 app.use('/members', membersRouter)
 app.use('/medications', medicationRouter)
+app.use('/register',registerRouter)
+
+
+
+
+
+
 
 app.listen(PORT, ()=>{
     console.log("Server is running...")
