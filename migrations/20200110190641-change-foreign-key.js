@@ -3,13 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-    return queryInterface.addColumn('CareProviders','familyid',{
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'families',
-        key: 'id'
-      }
-    })
+    return queryInterface.removeColumn('CareProviders','family_id')
 
     /*
       Add altering commands here.
@@ -22,7 +16,13 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
 
-    return queryInterface.removeColumn('CareProviders','familyid')
+    return queryInterface.addColumn('CareProviders','family_id',{
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'families',
+        key: 'id'
+      }
+    })
 
     /*
       Add reverting commands here.
