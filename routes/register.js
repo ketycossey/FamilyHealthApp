@@ -15,20 +15,27 @@ app.post('/',(req,res) => {
        }
    })
    if(persistedUser == null){
-       let user = models.Family.build({
-           familyName : familyName,
-           username : username,
-           address : address,
-           password: password
+       bcrypt.hash(password, SALT_ROUNDS,async(error, hash)=>{
+           if(error){
+               res.render('/', {message: 'Error creating user!'})
+           }else{
+            let family = models.Family.build({
+                familyName : familyName,
+                username : username,
+                address : address,
+                password: hash
+            })
+            let savedUser = await family.save()
+            if(savedUser != null){
+                res.redirect('/login')
+            }else{
+                res.render('/',{message: "User already exists!"})
+            }
+        }
        })
-       let savedUser = await family.save()
-       if(savedUser != null){
-           res.redirect('/login')
-       }else{
-           res.render('/',{message: "User already exists!"})
-       }
-   }
-
+   }else{
+       res.render('/',{message:"User already exists!"})
+   }   
 })
 
 app.get('/',(req,res) => {
