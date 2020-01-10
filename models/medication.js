@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     medicineName: DataTypes.STRING,
     medImageUrl: DataTypes.STRING,
     medDescription: DataTypes.STRING,
-    medFrequency: DataTypes.STRING
+    medFrequency: DataTypes.STRING,
   }, {});
   Medication.associate = function(models) {
     // associations can be defined here
