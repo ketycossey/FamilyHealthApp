@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   family.associate = function(models) {
     models.family.hasMany(models.Family_member,{onDelete:'cascade',hooks:true})
-  
   };
   return family;
 };
