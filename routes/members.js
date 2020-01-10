@@ -17,5 +17,18 @@ router.post('/add/:familyId',(req,res) => {
     member.save().then(savedMember => console.log(savedMember))
 })
 
+router.post('/update/:memberId',(req,res) => {
+    let member = models.Family_member.update({
+        image_url: req.body.image_url,
+        family_member: req.body.family_member,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        birthday: req.body.birthday}, {
+        where: {
+            id: req.params.memberId
+        }
+    )
+})
+
 
 module.exports = router
