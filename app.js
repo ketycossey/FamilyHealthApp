@@ -21,6 +21,7 @@ const familiesRouter = require('./routes/families')
 const membersRouter = require('./routes/members')
 const medicationRouter = require('./routes/medications')
 const registerRouter = require('./routes/register')
+const loginRouter = require('./routes/login')
 
 
 app.use('/', indexRouter)
@@ -29,6 +30,7 @@ app.use('/families', familiesRouter)
 app.use('/members', membersRouter)
 app.use('/medications', medicationRouter)
 app.use('/register',registerRouter)
+app.use('/login', loginRouter)
 
 
 

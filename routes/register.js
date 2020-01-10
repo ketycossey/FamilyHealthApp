@@ -1,22 +1,38 @@
 const express = require("express")
 const router = express.Router()
 
-app.get('/',(req,res) => {
-    res.render('register')
-})
-app.post('/register',(req,res) => {
+
+app.post('/',(req,res) => {
 
     const familyName = req.body.family_name 
     const username = req.body.username
     const password = req.body.password
     const address = req.body.address
 
-    bcrypt.hash(password, SALT_ROUNDS).then(hash => {
-        db.none('INSERT INTO users(familyName, username, password, address ) VALUES($1,$2,$3,$4)',[familyName, username, hash, address]).then(() => {
-            res.redirect('/login')
-        })
-    })
+   modules.Family.findOne({
+       where:{
+           username: username
+       }
+   })
+   if(persistedUser == null){
+       let user = models.Family.build({
+           familyName : familyName,
+           username : username,
+           address : address,
+           password: password
+       })
+       let savedUser = await family.save()
+       if(savedUser != null){
+           res.redirect('/login')
+       }else{
+           res.render('/',{message: "User already exists!"})
+       }
+   }
 
+})
+
+app.get('/',(req,res) => {
+    res.render('register')
 })
 
 module.exports = router
