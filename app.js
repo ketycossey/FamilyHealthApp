@@ -16,10 +16,11 @@ const PORT = process.env.PORT || 8080
 require('dotenv').config()
 const path = require('path')
 const VIEWS_PATH = path.join(__dirname,'/views')
-const session = require("express-session")
+global.session = require("express-session")
+
 app.use(session({
-    secret: "He who has a why to live can bear almost any how",
-    resave: false,
+    secret: "secreto",
+    resave: true,
     saveUninitialized: true
 }))
 
