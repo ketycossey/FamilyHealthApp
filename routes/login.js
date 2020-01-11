@@ -8,7 +8,6 @@ router.post('/', async (req,res)=>{
     let family = await models.family.findOne({
         where:{
             username: username
-           
         }
     })
     if(family != null){
@@ -17,7 +16,8 @@ router.post('/', async (req,res)=>{
                 if(req.session){
                     req.session.family= {userId: family.id}
                     req.session.username = {username: family.username}
-                    res.redirect('/index')
+                    res.redirect('/families')
+                    
                 }
             }else{
                 res.render('login', {message:'Incorrect username or password'})
