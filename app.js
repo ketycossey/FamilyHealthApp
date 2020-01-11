@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
-const SALT_ROUNDS = 10
+global.bcrypt = require('bcrypt')
+global.SALT_ROUNDS = 10
 const careprovidersRouter = require('./routes/careproviders')
 const familiesRouter = require('./routes/families')
 const membersRouter = require('./routes/members')
@@ -23,9 +23,9 @@ app.use(session({
     saveUninitialized: true
 }))
 
-//global.models = require("./models")
 
-const models = require('./models')
+
+global.models = require('./models')
 models.family.findAll().then(r => console.log(r))
 
 

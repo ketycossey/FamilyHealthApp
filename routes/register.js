@@ -4,15 +4,15 @@ const router = express.Router()
 
 router.post('/',async (req,res) => {
 
-    let familyName = req.body.family_name 
+    let family_name = req.body.family_name 
     let username = req.body.username
     let password = req.body.password
     let address = req.body.address
 
     let persistedFamily= await models.family.findOne({
        where:{
-           familyName: familyName,
-           username:username,
+           family_name: family_name,
+           username: username,
            address: address
        }
    })
@@ -22,7 +22,7 @@ router.post('/',async (req,res) => {
                res.render('/', {message: 'Error creating user!'})
            }else{
             let family = models.family.build({
-                familyName : familyName,
+                family_name : family_name,
                 username : username,
                 address : address,
                 password: hash
