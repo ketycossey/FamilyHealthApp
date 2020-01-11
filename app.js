@@ -17,6 +17,7 @@ require('dotenv').config()
 const path = require('path')
 const VIEWS_PATH = path.join(__dirname,'/views')
 global.session = require("express-session")
+const checkAuthorization = require('./middlewares/authorization')
 
 app.use(session({
     secret: "secreto",
@@ -48,7 +49,7 @@ app.use('/register',registerRouter)
 app.use('/login', loginRouter)
 app.use('/labresults', labresultsRouter)
 app.use('/careproviders', careprovidersRouter)
-app.use('/families', familiesRouter)
+app.use('/families',checkAuthorization, familiesRouter)
 app.use('/members', membersRouter)
 app.use('/medications', medicationRouter)
 
