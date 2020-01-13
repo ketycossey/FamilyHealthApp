@@ -18,6 +18,7 @@ router.post('/', async (req,res)=>{
                 if(req.session){
                     req.session.family= {userId: family.id}
                     req.session.username = {username: family.username}
+                    
                     req.session.isAuth = true
                     res.redirect('/families')
                 }
