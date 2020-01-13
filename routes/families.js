@@ -15,12 +15,10 @@ router.get("/", async (req,res)=>{
   res.render('family', {families: families})
 })
 
-router.get("/:memberId", async (req,res)=>{
-  let memberId= req.params.memberId
+router.get("/", async (req,res)=>{
   let members = await models.family_member.findAll({
     where:{
-      memberId: memberId
-  
+      id: req.session.family.userId
     }
   })
   res.render('family', {members: members})
