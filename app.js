@@ -52,7 +52,7 @@ app.use('/login', loginRouter)
 app.use('/labresults', labresultsRouter)
 app.use('/careproviders', careprovidersRouter)
 app.use('/families',checkAuthorization, familiesRouter)
-app.use('/members', membersRouter)
+app.use('/members', checkAuthorization, membersRouter)
 app.use('/medications', medicationRouter)
 
 app.listen(PORT, ()=>{

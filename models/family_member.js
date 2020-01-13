@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     birthday: DataTypes.STRING,
-    family_id: DataTypes.INTEGER
+    family_id: DataTypes.INTEGER,
+    familyId: {
+      type: DataTypes.INTEGER,
+      field: 'family_id'
+    }
   }, {});
   Family_member.associate = function(models) {
     models.Family_member.belongsTo(models.family,{as: 'Family_member',foreignKey: 'family_id'})

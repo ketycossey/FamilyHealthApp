@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     memberId: DataTypes.INTEGER
   }, {});
   TestLab.associate = function(models) {
-    models.TestLab.belongsTo(models.Family_member, {as:'family_member', foreignKey: 'memberId'})
+    models.TestLab.belongsTo(models.Family_member, {as:'family_member', foreignKey: 'memberId', onDelete:'cascade',hooks:true})
   };
   return TestLab;
 };
