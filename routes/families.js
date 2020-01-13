@@ -15,9 +15,16 @@ router.get("/", async (req,res)=>{
   res.render('family', {families: families})
 })
 
-router.get("/", async (req,res)=>{
+router.get("/:memberId", async (req,res)=>{
+  let memberId= req.params.memberId
+  let members = await models.family_member.findAll({
+    where:{
+      memberId: memberId
   
+    }
+  })
+  res.render('family', {members: members})
 })
-
+  
 
 module.exports = router
