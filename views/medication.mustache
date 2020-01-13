@@ -1,6 +1,12 @@
-<html>
+
+<!doctype html>
+<html lang="en">
+ {{> head}}
 <head></head>
 <body>
+<hr/>
+<a href="/medications/add-medication"><button >Add Medication</button></a>
+
 <h5>Medications </h5>
 <ul>
 {{#medications}}
@@ -19,64 +25,7 @@
 {{/medications}}
 </ul>
 
- <h1>Add medicine</h1>
-
-    <div class="container">
-      <form action="/users/upload" method="POST" enctype="multipart/form-data">
-        <label>Photo</label>
-        <input type="file" name="photo" />
-        <button type="submit">Upload</button>
-      </form>
-
-      <img src="{{imageURL}}" class="{{className}}" />
-
-      <form action="/medications/add-medicine" method="POST">
-        <div class="form-group">
-    <label>Medicine Name</label>
-    <input type="text" name="medicineName" class="form-control" placeholder="Enter Medicine Name">
-  </div>
-    <div class="form-group">
-    <label>Description of Medicine</label>
-    <textarea class="form-control" name="medDescription"></textarea>
-    </div>
-    <div class="form-group">
-    <label>Frequency</label>
-    <input type="text" name="medFrequency" />
-  </div>
-
-  <button type="submit" class="btn btn-primary">Save</button>
-      </form>
 
 
-<h1>Edit  medicine</h1>
-
-    <div class="container">
-      <form action="/users/upload" method="POST" enctype="multipart/form-data">
-        <label>Photo</label>
-        <input type="file" name="photo" />
-        <button type="submit">Upload</button>
-      </form>
-
-      <img src="{{imageURL}}" class="{{className}}" />
-
-      <form action="/medications/edit-medicine" method="POST">
-        <input type="hidden" name="medId" value={{id}}/>
-        <div class="form-group">
-    <label>Medicine Name</label>
-    <input type="text" name="medicineName" class="form-control" placeholder="Enter Medicine Name">
-  </div>
-    <div class="form-group">
-    <label>Description of Medicine</label>
-    <textarea class="form-control" name="medDescription"></textarea>
-    </div>
-    <div class="form-group">
-    <label>Frequency</label>
-    <input type="text" name="medFrequency" />
-  </div>
-
-  <button type="submit" class="btn btn-primary">Save</button>
-      </form>
 </body>
-
-
 <html>
