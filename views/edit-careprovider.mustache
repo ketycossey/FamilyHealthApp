@@ -1,0 +1,33 @@
+</html>
+
+<!doctype html>
+<html lang="en">
+{{> head}}
+<body>
+  
+
+  
+<div class = "container">
+<h1>Edit Care Provider</h1>
+{{#myprovider}}
+<form method="POST" action="/careproviders/edit-careprovider">
+    <input name="doctor_name" type="text" value="{{doctor_name}}"/>
+    <input name="specialty" type="text" value="{{specialty}}"placeholder="Specialty"/>
+    <input name="phone" type="text" value="{{phone}}"placeholder="Phone Number"/>
+    <input name="email" type="text" value="{{email}}"placeholder="Email"/>
+    <input name="address" type="text" value="{{address}}"placeholder="Addres"/>
+    <input name="website" type="text" value="{{website}}"placeholder="website"/>
+    <input name="id" type="hidden" value="{{id}}"/>
+    <button>Save</button>
+</form>
+
+<form method="POST" action="/careproviders/delete-careprovider">
+    <input name="id" type="hidden" value="{{id}}"/>
+    <button>DELETE</button>
+</form>
+{{/myprovider}}
+
+</div>
+{{> footer}}
+</body>
+</html>
