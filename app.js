@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
-const SALT_ROUNDS = 10
+global.bcrypt = require('bcrypt')
+global.SALT_ROUNDS = 10
 const careprovidersRouter = require('./routes/careproviders')
 const familiesRouter = require('./routes/families')
 const membersRouter = require('./routes/members')
@@ -16,12 +16,15 @@ const PORT = process.env.PORT || 8080
 require('dotenv').config()
 const path = require('path')
 const VIEWS_PATH = path.join(__dirname,'/views')
-const session = require("express-session")
+global.session = require("express-session")
+const checkAuthorization = require('./middlewares/authorization')
+
 app.use(session({
-    secret: "He who has a why to live can bear almost any how",
-    resave: true, //true?
-    saveUninitialized: false //false? 
+    secret: "secreto",
+    resave: true,
+    saveUninitialized: false
 }))
+
 
 global.models = require("./models")
 global.__basedir = __dirname 
@@ -43,12 +46,12 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views',VIEWS_PATH)
 app.set('view engine', 'mustache')
-app.use('/', indexRouter)
+app.use('/index', indexRouter)
 app.use('/register',registerRouter)
 app.use('/login', loginRouter)
 app.use('/labresults', labresultsRouter)
 app.use('/careproviders', careprovidersRouter)
-app.use('/families', familiesRouter)
+app.use('/families',checkAuthorization, familiesRouter)
 app.use('/members', membersRouter)
 app.use('/medications', medicationRouter)
 
