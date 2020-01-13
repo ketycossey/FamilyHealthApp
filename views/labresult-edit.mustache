@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+ {{> head}}
+  <body>
+  
+  {{> navbar}}
+  
+  <div class = "container">
+  <h1> Edit Lab Result </h1>
+    <form action="/labresults/upload/edit/{{id}}" method="POST" enctype="multipart/form-data">
+      <label> Photo </label>
+      <input type="file" name="photo">
+      <button type="submit"> Upload </button>
+    </form>
+    
+    <img src='/uploads/{{imageURL}}' class="{{className}}">
+    
+    <form action="/labresults/update-labresult" method = "POST">
+      <input type="hidden" name="labresultId" value={{id}} />
+      <div class = "form-group">
+        <label> Lab TesT Day</label>
+        <input type="text" name="testdate" value={{test_date}}class="form-control" placeholder = "Enter Test Date" />
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <input type="text" name="category" class="form-control" placeholder="ex: pediatrics, cardiologist, dentist" /> {{category}} 
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    
+    <div>
+      {{#message}}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+      {{/message}}
+    </div>
+    
+    
+  </div>
+  {{> footer}}
+  </body>
+</html>
