@@ -59,6 +59,7 @@ router.post("/edit-careprovider", (req, res) => {
 
 router.get("/edit-careprovider/:provider", (req, res) => {
     let id = req.params.provider
+    console.log(id)
     models.CareProviders.findByPk(id).then((myprovider) => {
         res.render("edit-careprovider", {myprovider: myprovider})
     })
