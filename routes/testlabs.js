@@ -13,7 +13,7 @@ router.get('/add-lab-result', async (req, res) => {
 router.post('/add-lab-result', async (req, res) => {
   let testdate = req.body.testdate
   let category = req.body.category
-  let memberId = req.session.user.memberId
+  let memberId = 2
   
   let labresult = models.TestLab.build({
     test_date: testdate,
@@ -24,12 +24,14 @@ router.post('/add-lab-result', async (req, res) => {
   
   let persistedProduct = await labresult.save()
   if(persistedProduct != null) {
-    res.redirect('/labresults')
+    res.redirect('/labresults/2')
   } else {
     res.render('add-lab-result', {message: 'Unable to add labresult'})
   }
   
 })
+
+
 
 function uploadFile(req, callback) {
   new formidable.IncomingForm().parse(req)
@@ -50,6 +52,7 @@ router.post('/upload', (req, res) => {
   })
 })
 
+// WORKING ON
 router.post('/upload/edit/:labId', (req, res) => {
   uploadFile(req, async (photoURL) => {
     
@@ -58,31 +61,32 @@ router.post('/upload/edit/:labId', (req, res) => {
     
     let response = labresult.dataValues
     response.imageURL = photoURL
-    res.render('labresults-edit')
+    res.render('labresult-edit', response)
   })
-  res.send()
+  
 })
 
 router.post('/update-labresult', async (req, res) => {
+  
   const labresultId = req.body.labresultId
   const category = req.body.category
   const testdate = req.body.testdate
   
-  models.TestLab.update({
+  await models.TestLab.update({
     category: category,
     test_date: testdate,
     imageURL: uniqueFilename
-    
-  }), {
+  }, {
     where: {
       id: labresultId
     }
-  }
-  res.redirect('/labresults')
+  })
+  res.redirect('/labresults/2')
 })
 
+// DONE
 router.get('/edit/:labresultId', async (req, res) => {
-  let labresultId = req.body.labresultId
+  let labresultId = req.params.labresultId
   let labresult = await models.TestLab.findByPk(labresultId)
   res.render('labresult-edit', labresult.dataValues)
 })
@@ -95,14 +99,15 @@ router.post('/delete-labresult', async (req, res) => {
       id: labresultId
     }
   })
-  res.redirect('/labresults')
+  res.redirect('/labresults/2')
 })
 
-router.get('/:memberId', async (req, res) => {
-  let memberId = req.params.memberId
+// DONE
+router.get('/2', async (req, res) => {
+
   let labresults = await models.TestLab.findAll({
     where: {
-      memberId: memberId
+      memberId: 2
     }
   })
   
