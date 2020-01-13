@@ -6,7 +6,10 @@ router.get("/", (req, res) => {
     .findAll()
     .then(medications => res.render("medication", { medications: medications }));
 });
-router.post('/add-medicine', async(req, res)=>{
+router.get('/add-medication', (req, res) => {
+  res.render('add-medication')
+})
+router.post('/add-medication', async(req, res)=>{
   let medicineName = req.body.medicineName
   let medDescription = req.body.medDescription
   let medFrequency = req.body.medFrequency
