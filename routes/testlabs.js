@@ -77,10 +77,9 @@ router.post('/update-labresult', async (req, res) => {
     where: {
       id: labresultId
     }
-  })
-  res.redirect('/labresults')
-}
-
+  }
+  res.redirect('labresults')
+})
 router.get('/edit/:labresultId', async (req, res) => {
   let labresultId = req.body.labresultId
   let labresult = await models.TestLab.findByPk(labresultId)
