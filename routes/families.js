@@ -6,9 +6,17 @@ router.post("/signout", (req, res) => {
     res.redirect("/login")
   })  
   
+router.get("/", async (req,res)=>{
+  let families = await models.family.findAll({
+    where:{
+      id: req.session.family.userId
+    }
+  })
+  res.render('family', {families: families})
+})
 
-router.get("/", (req,res)=>{
-    models.family.findAll().then(families => res.render("family", {families: families}))
+router.get("/", async (req,res)=>{
+  
 })
 
 
