@@ -1,6 +1,7 @@
-<html>
-<head></head>
-<body>
+<!doctype html>
+<html lang="en">
+ {{> head}}
+  <body>
 <h1> REGISTER </h1>
 <form action="/register" method="POST">
     <div class="form-group">
@@ -24,7 +25,9 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>
+    <a href="/login"> Already a member? Login </a>
   </form>
 
 </body>
+{{> footer}}
 </html>

@@ -15,6 +15,7 @@ router.post('/add/:familyId',(req,res) => {
         family_id: req.params.familyId
     })
     member.save().then(savedMember => console.log(savedMember))
+    
 })
 
 router.post('/update/:memberId',(req,res) => {

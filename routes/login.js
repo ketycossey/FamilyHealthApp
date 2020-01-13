@@ -1,24 +1,25 @@
 const express = require("express")
 const router = express.Router()
+const bcrypt = require('bcrypt')
+const models = require('../models')
 
 
 router.post('/', async (req,res)=>{
     let username = req.body.username
     let password = req.body.password
-    let user = await models.family.findOne({
+    let family = await models.family.findOne({
         where:{
             username: username
-           
         }
     })
-    if(user != null){
-        bcrypt.compare(password, user.password, (error, result)=>{
+    if(family != null){
+        bcrypt.compare(password, family.password, (error, result)=>{
             if(result){
-                if(require.session){
-                    req.session.userId = {userId: family.id}
+                if(req.session){
+                    req.session.family= {userId: family.id}
                     req.session.username = {username: family.username}
                     req.session.isAuth = true
-                    res.redirect('/index')
+                    res.redirect('/families')
                 }
             }else{
                 res.render('login', {message:'Incorrect username or password'})
@@ -32,5 +33,7 @@ router.post('/', async (req,res)=>{
 router.get('/',(req,res) => {
     res.render('login')
 })
+
+
 
 module.exports = router

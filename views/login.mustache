@@ -1,6 +1,8 @@
-<html>
-<head> </head>
-<body> 
+<!doctype html>
+<html lang="en">
+ {{> head}}
+  <body>
+  
 <h1> LOGIN </h1>
 <form action="/login" method="POST">
     <div class="form-group">
@@ -15,6 +17,12 @@
 
     <button type="submit" class="btn btn-primary">Login</button>
   </form>
+  <a href="/register"> Not a member yet? Create an account </a>
+
+  {{#message}}
+   <p> {{message}}</p>
+  {{/message}}  
 
 </body>
+ {{> footer}}
 </html>

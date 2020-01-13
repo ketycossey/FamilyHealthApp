@@ -6,12 +6,16 @@
 {{#medications}}
 <p><h3>Medicine Name: {{medicineName}}</h3></p>
 <p>id:{{id}}</p>
-
 <div>
 <p> Photo:{{medImageUrl}}</p>
 <p> Description of Med:   {{medDescription}}</p>
 <p> Frequency: {{medFrequency}} </p>
 
+<form action='/medications/delete-medicine' method='POST'>
+<input type='hidden' name="medicineId" value= "{{id}}" />
+<button type = "submit">Delete</button>
+</form>
+<a href="/medication/{{id}}"><button >Edit</button></a>
 {{/medications}}
 </ul>
 

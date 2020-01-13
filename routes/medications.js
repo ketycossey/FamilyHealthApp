@@ -26,7 +26,11 @@ if (persistedMedication !=null){
   res.render('/add-medicine', {message:'Unable to add medication'})
 }
 })
-
+router.get('/medications/:medicationId', async (req, res) =>{
+  let medicationId = req.params.medicationId
+  let medication= await models.Medication.findByPk(medicationId)
+  res.render('/edit-medicine', medication.dataValues)
+})
 router.post('/edit-medicine', async (req, res)=>{
  //const medId = request.body.medId
   const medicineName = req.body.medicineName
@@ -42,5 +46,17 @@ const result = await models.Medication.update({
   
 })
 res.redirect('/medications')
+})
+
+router.post('/delete-medicine', async (req, resp)=>{
+  let medicineId = parseInt(req.body.medicineId)
+  let result = await models.Medication.destroy({
+    where:{
+      id:medicineId
+    }
+
+
+  })
+res.redirect('/medication')
 })
 module.exports = router;
