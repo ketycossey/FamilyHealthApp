@@ -50,7 +50,7 @@ router.post('/upload', (req, res) => {
   })
 })
 
-router.post('/upload/edit/:LabId', (req, res) => {
+router.post('/upload/edit/:labId', (req, res) => {
   uploadFile(req, async (photoURL) => {
     
     let labId = parseInt(req.params.labId)
@@ -77,15 +77,16 @@ router.post('/update-labresult', async (req, res) => {
     where: {
       id: labresultId
     }
-  })
+  }
   res.redirect('/labresults')
-}
+})
 
 router.get('/edit/:labresultId', async (req, res) => {
   let labresultId = req.body.labresultId
   let labresult = await models.TestLab.findByPk(labresultId)
   res.render('labresult-edit', labresult.dataValues)
 })
+
 router.post('/delete-labresult', async (req, res) => {
   let labresultId = parseInt(req.body.labresultId)
   
@@ -97,10 +98,11 @@ router.post('/delete-labresult', async (req, res) => {
   res.redirect('/labresults')
 })
 
-router.get('/', async (req, res) => {
+router.get('/:memberId', async (req, res) => {
+  let memberId = req.params.memberId
   let labresults = await models.TestLab.findAll({
     where: {
-      memberId: req.session.user.memberId //ask connections ? also drop table
+      memberId: memberId
     }
   })
   

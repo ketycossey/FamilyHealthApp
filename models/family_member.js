@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Family_member.associate = function(models) {
     models.Family_member.belongsTo(models.family,{as: 'Family_member',foreignKey: 'family_id'})
+    //models.Family_member.hasMany(models.TestLab, { as: 'TestLab', foreignKey:'labId' })
   };
   return Family_member;
 };
