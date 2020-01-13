@@ -7,8 +7,7 @@ router.get("/", (req, res) => {
         where: {
             member_id: 1
         }
-    }).then(providers => 
-        res.render("careproviders", {providers: providers}))
+    }).then(providers => res.render("careproviders", {providers: providers}))
 })
 
 router.get("/add-careprovider", (req, res) => {
