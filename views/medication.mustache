@@ -1,9 +1,14 @@
 
 <!doctype html>
 <html lang="en">
- {{> head}}
-<head></head>
+
+<head>
+{{> head}}
+</head>
 <body>
+{{> navbar}}
+ <div class = "container">
+
 <hr/>
 <a href="/medications/add-medication"><button >Add Medication</button></a>
 
@@ -21,7 +26,7 @@
 <input type='hidden' name="medicineId" value= "{{id}}" />
 <button type = "submit">Delete</button>
 </form>
-<a href="/medication/{{id}}"><button >Edit</button></a>
+<a href="/medications/edit-medication/{{id}}"><button >Edit</button></a>
 {{/medications}}
 </ul>
 
