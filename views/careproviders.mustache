@@ -1,12 +1,42 @@
-<html>
-<head></head>
+</html>
 
+<!doctype html>
+<html lang="en">
+{{> head}}
 <body>
-{{#providers}}
-    {{doctor_name}}
-{{/providers}}
+  
+{{> navbar}}
+  
+<div class = "container">
+  <table style="width:100%">
+  <tr>
+    <th>Doctor Name</th>
+    <th>Specialty</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Website</th>
+    <th></th>
+  </tr>
+  {{#providers}}
+  <tr>
+    <td>{{doctor_name}}</td>
+    <td>{{specialty}}</td>
+    <td>{{phone}}</td>
+    <td>{{email}}</td>
+    <td>{{address}}</td>
+    <td>{{website}}</td>
+    <td><a href="careproviders/edit-careprovider/{{id}}"><button>Edit</button></a></td>
+  </tr>
+  {{/providers}}
+  </table>
 
+  {{^providers}}
+  <h3>No Providers</h3>
+  {{/providers}}
 
+</div>
+<a href="careproviders/add-careprovider"><button>Add Care Provider</button></a>
+{{> footer}}
 </body>
-
 </html>

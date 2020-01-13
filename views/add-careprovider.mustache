@@ -1,0 +1,25 @@
+</html>
+
+<!doctype html>
+<html lang="en">
+{{> head}}
+<body>
+  
+{{> navbar}}
+  
+<div class = "container">
+<h1>Add Care Provider</h1>
+<form method="POST" action="/careproviders/add-careprovider">
+    <input name="doctor_name" type="text" placeholder="Doctor Name"/>
+    <input name="specialty" type="text" placeholder="Specialty"/>
+    <input name="phone" type="text" placeholder="Phone Number"/>
+    <input name="email" type="text" placeholder="Email"/>
+    <input name="address" type="text" placeholder="Addres"/>
+    <input name="website" type="text" placeholder="website"/>
+    <button>Save</button>
+</form>
+
+</div>
+{{> footer}}
+</body>
+</html>
