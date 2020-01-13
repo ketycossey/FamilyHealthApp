@@ -5,9 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     medImageUrl: DataTypes.STRING,
     medDescription: DataTypes.STRING,
     medFrequency: DataTypes.STRING,
+    member_id:DataTypes.INTEGER
   }, {});
   Medication.associate = function(models) {
-   models.Medication.belongsTo(models.Family_member, {as: 'family_member', foreignKey:"memberId"})
+  models.Medication.belongsTo(models.Family_member, {as: 'family_member', foreignKey: "member_id"})
     // associations can be defined here
   };
   return Medication;

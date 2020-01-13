@@ -11,7 +11,7 @@ const medicationRouter = require('./routes/medications')
 const indexRouter = require('./routes/index')
 const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
-const labresultsRouter = require('./routes/labresults')
+const labresultsRouter = require('./routes/testlabs')
 const PORT = process.env.PORT || 8080
 require('dotenv').config()
 const path = require('path')
@@ -22,13 +22,12 @@ const checkAuthorization = require('./middlewares/authorization')
 app.use(session({
     secret: "secreto",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false
 }))
 
 
-
-global.models = require('./models')
-models.family.findAll().then(r => console.log(r))
+global.models = require("./models")
+global.__basedir = __dirname 
 
 
 function auth(req,res,next) {
@@ -39,7 +38,10 @@ function auth(req,res,next) {
     }
 }
 
-app.use(express.static(__dirname + '/public'))
+app.use('/uploads', express.static('uploads'))
+app.use('/css', express.static('css'))
+// changed the public static folder
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views',VIEWS_PATH)

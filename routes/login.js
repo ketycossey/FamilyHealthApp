@@ -1,5 +1,7 @@
 const express = require("express")
 const router = express.Router()
+const bcrypt = require('bcrypt')
+const models = require('../models')
 
 
 router.post('/', async (req,res)=>{
@@ -16,8 +18,8 @@ router.post('/', async (req,res)=>{
                 if(req.session){
                     req.session.family= {userId: family.id}
                     req.session.username = {username: family.username}
+                    req.session.isAuth = true
                     res.redirect('/families')
-                    
                 }
             }else{
                 res.render('login', {message:'Incorrect username or password'})
