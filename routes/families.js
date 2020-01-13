@@ -7,8 +7,6 @@ router.post("/signout", (req, res) => {
   })  
   
 router.get("/", async (req,res)=>{
-  //let familyId = req.params.familyId
-
   let families = await models.family.findAll({
     where:{
       id: req.session.family.userId
@@ -16,5 +14,10 @@ router.get("/", async (req,res)=>{
   })
   res.render('family', {families: families})
 })
+
+router.get("/", async (req,res)=>{
+  
+})
+
 
 module.exports = router
