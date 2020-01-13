@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
        
 })
 
-<<<<<<< HEAD
 router.post("/", (req, res) => {
     const provider = models.CareProviders.build({
         doctor_name: req.body.doctor_name,
@@ -25,6 +24,3 @@ router.post("/", (req, res) => {
 })
 
 module.exports = router
-=======
-module.exports = router
->>>>>>> 8d2d6936265350c2fa7f297b8b261255a6afac57
