@@ -23,9 +23,9 @@ app.use(session({
     saveUninitialized: true
 }))
 
-//global.models = require("./models")
+global.models = require("./models")
 
-const models = require('./models')
+//const models = require('./models')
 models.family.findAll().then(r => console.log(r))
 
 
