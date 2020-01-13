@@ -8,11 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      memberId:{
-        allowNull:false,
-        type:Sequelize.STRING,
-        references:{ model: 'family_Member', field:'id'}
-      },
       medicineName: {
         type: Sequelize.STRING
       },
@@ -24,6 +19,11 @@ module.exports = {
       },
       medFrequency: {
         type: Sequelize.STRING
+      },
+      member_id:{
+        allowNull:false,
+        type:Sequelize.INTEGER,
+        references:{ model: 'Family_members', field:'id'}
       },
       createdAt: {
         allowNull: false,

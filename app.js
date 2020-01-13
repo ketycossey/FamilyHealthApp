@@ -25,8 +25,6 @@ app.use(session({
 
 global.models = require("./models")
 global.__basedir = __dirname 
-//const models = require('./models')
-//models.family.findAll().then(r => console.log(r))
 
 
 function auth(req,res,next) {
@@ -41,8 +39,6 @@ app.use('/uploads', express.static('uploads'))
 app.use('/css', express.static('css'))
 // changed the public static folder
 app.use(express.static('public'))
-//app.use('/public', express.static('public'))
-//app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views',VIEWS_PATH)
