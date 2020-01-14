@@ -9,8 +9,8 @@ router.get("/", (req,res)=>{
         }
     }).then(members => {
         //console.log(members)
-        res.render("members", {members: members})
-        console.log(req.session)
+        res.render("members", {members: members, name:req.session.family.family_name})
+
     })
 })
 
@@ -30,9 +30,13 @@ router.post('/add/',(req,res) => {
 })
 
 router.get('/update/:member',(req,res) => {
-  
-    res.render('update', {id: req.params.member})
-
+  let member = models.Family_member.findAll({
+      where: {
+          id: req.params.member
+      }
+  }).then(member => {
+    res.render('update', {id: req.params.member, name: member[0].dataValues.first_name})
+  })
 })
 
 router.get('/add',(req,res) => {
@@ -64,7 +68,7 @@ router.post('/delete/:memberId',(req,res) => {
             id: req.params.memberId
         }
     })
-    res.render('members')
+    res.redirect('members')
 })
 
 module.exports = router
