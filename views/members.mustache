@@ -10,8 +10,6 @@
 <div class="container-fluid p-4">
 
 
-<<<<<<< HEAD
-=======
  <div class="row">
 <div class="col">
 <form method="get" action="./members/add">
@@ -24,7 +22,7 @@
     </form>
     </div>    
 </div>
->>>>>>> master
+
 
     <div class="row">
 <div class="col-lg-6 text-right">
@@ -34,6 +32,11 @@
 
 <ul class="list-group list-group-flush">
 {{#members}}
+
+    <form action="/members/member" method="POST">
+        <input name="member_id" type="hidden" value="{{id}}"/>
+        <button>Info</button>
+    </form>
 
   <li class="list-group-item my-1 bg-light rounded-left border-bottom border-primary">
   <b class="text-secondary">Name: </b>{{last_name}}, {{first_name}}<b class="text-secondary"> DOB:</b> {{birthday}}
