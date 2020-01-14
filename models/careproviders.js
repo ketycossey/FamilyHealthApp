@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     member_id: DataTypes.INTEGER
   }, {});
   CareProviders.associate = function(models) {
-    // associations can be defined here
+    models.CareProviders.belongsTo(models.Family_member, {as:'Family_member', foreignKey: 'member_id'})
   };
   return CareProviders;
 };
