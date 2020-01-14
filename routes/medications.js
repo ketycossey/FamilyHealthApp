@@ -3,6 +3,7 @@ const router = express.Router();
 const formidable = require('formidable')
 const uuidv1 = require('uuid/v1')
 const models = require('../models')
+const fs = require('fs')
 
 
 let uniqueFilename = ''
@@ -47,7 +48,7 @@ router.get("/edit-medication/:id", async (req, res) => {
 });
 
 router.post("/edit-medication/:id", async (req, res) => {
-  const id = request.body.id
+  const id = req.body.id
   const medicineName = req.body.medicineName;
   const medDescription = req.body.medDescription;
   const medFrequency = req.body.medFrequency;
@@ -61,17 +62,23 @@ router.post("/edit-medication/:id", async (req, res) => {
     },
     { where: { medicineName: medicineName } }
   );
-  res.redirect("/medications");
+  res.render("medication");
 });
 //delete medication
-router.post("/delete-medicine", async (req, resp) => {
+router.post("/delete-medicine", async (req, res) => {
   let medicineId = parseInt(req.body.medicineId);
+  let medImageUrl = req.body.medImageUrl
   let result = await models.Medication.destroy({
     where: {
       id: medicineId
     }
-  });
-  res.render("/medication");
+  })
+   if (result) {
+     console.log(medImageUrl)
+     fs.unlinkSync(`${__basedir}/uploads/${medImageUrl}`)
+     console.log(result)
+    }
+  res.redirect("/medications");
 });
 
 
