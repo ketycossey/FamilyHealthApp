@@ -4,27 +4,34 @@
 <html lang="en">
  {{> head}}
   <body>
-  
-  {{> navbar}}
-<div class="container-fluid">
-    <div class="col-8 offset-2">
-    {{#members}}
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{first_name}} {{last_name}} <small>{{family_member}}</small></h5>
-        <small>
-            <button class="btn btn-default btn-xs pull-right remove-item">
-            <span class="material-icons btn-xs">edit</span>
-            </button>
-            <form action="members/delete/{{id}}" method="post">
-                <button class="btn btn-default btn-xs pull-right remove-item">
-            </form>
-            <span class="material-icons btn-xs">delete</span>
-            </button>
-        </small>
-        </div>
-    </a>
+
+{{> navbar}}
+
+<div class="container-fluid p-1">
+    <div class="row">
+
+{{#members}}
+<div class="col-12 text-right">
+<ul class="list-group list-group-flush">
+  <li class="list-group-item bg-light">
+  <b>Name: </b>{{last_name}}, {{first_name}}<b> DOB:</b> {{birthday}}
+  <button class="material-icons btn btn-light">delete</button>
+  <button class="material-icons btn btn-light">edit</button>
+  </li>
+</ul>
+</div>
     {{/members}}
+
+    </div>
+
+    <div class="row">
+
+<form method="get" action="./members/add">
+        <button class="dropdown-item">Add Member</button>
+    </form>
+</div>
+
+
     </div>
 </div>
 
