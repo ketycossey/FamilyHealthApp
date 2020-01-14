@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     models.Family_member.hasMany(models.Insurance, {as: 'Insurance', foreignKey:'member_id'})
     models.Family_member.hasMany(models.Medication, {as:'Medication', foreignKey:'member_id'})
     models.Family_member.hasMany(models.CareProviders, {as: 'Care_provider', foreignKey:'member_id'})
+    models.Family_member.hasMany(models.Appointment, {as: 'Appointment', foreignKey:'member_id'})
   };
   return Family_member;
 };

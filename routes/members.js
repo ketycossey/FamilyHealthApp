@@ -67,8 +67,4 @@ router.post('/delete/:memberId',(req,res) => {
     res.render('members')
 })
 
-router.get("/calendar", (req, res) => {
-    res.render("calendar")
-})
-
 module.exports = router
