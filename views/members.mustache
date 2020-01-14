@@ -10,16 +10,13 @@
 <div class="container-fluid p-4">
 
 
- <div class="row">
-<div class="col">
-<form method="get" action="./members/add">
-        <button class=" border-bottom border-primary btn btn-light">Add Member</button>
-    </form>
-    </div>
-</div>
 
     <div class="row">
 <div class="col-lg-6 text-right">
+<h4 class="text-left">Welcome, {{name}}
+<a href="./members/add" class="float-right text-success"><i class="material-icons">person_add</i></a>
+</h4>
+
 <ul class="list-group list-group-flush">
 {{#members}}
 
@@ -35,7 +32,8 @@
   </div>
   </li>
     {{/members}}
-    </div>
+</div>
+    
 </ul>
 
 <div class="col-lg-6">
