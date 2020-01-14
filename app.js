@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index')
 const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const labresultsRouter = require('./routes/testlabs')
+const notesRouter = require('./routes/notes')
 
 const insuranceRouter = require('./routes/insurance')
 
@@ -61,6 +62,7 @@ app.use('/families',checkAuthorization, familiesRouter)
 app.use('/members', checkAuthorization, membersRouter)
 app.use('/medications', medicationRouter)
 app.use('/profile', profileRouter)
+app.use('/notes', notesRouter)
 
 app.listen(PORT, ()=>{
     console.log("Server is running...")
