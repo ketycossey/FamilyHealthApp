@@ -3,6 +3,7 @@ const router = express.Router();
 const formidable = require('formidable')
 const uuidv1 = require('uuid/v1')
 const models = require('../models')
+const fs = require('fs')
 
 
 let uniqueFilename = ''
@@ -13,10 +14,13 @@ router.get("/", (req, res) => {
   );
 });
 
+
 //add medication
 router.get("/add-medication", (req, res) => {
   res.render("add-medication",{className:"medicine-preview-image-invisible"});
 });
+
+
 router.post("/add-medication", async (req, res) => {
   let medicineName = req.body.medicineName;
   let medDescription = req.body.medDescription;
@@ -25,7 +29,7 @@ router.post("/add-medication", async (req, res) => {
 
   let medication = models.Medication.build({
     medicineName: medicineName,
-    imageURL: uniqueFilename,
+    medImageUrl: uniqueFilename,
     medDescription: medDescription,
     medFrequency: medFrequency
   });
@@ -33,7 +37,7 @@ router.post("/add-medication", async (req, res) => {
   if (persistedMedication != null) {
     res.redirect("/medications");
   } else {
-    res.render("/add-medicine", {message:"Unable to add medication" });
+    res.render("/add-medication", {message:"Unable to add medication" });
   }
 });
 //edit medication
@@ -44,7 +48,7 @@ router.get("/edit-medication/:id", async (req, res) => {
 });
 
 router.post("/edit-medication/:id", async (req, res) => {
-  const id = request.body.id
+  const id = req.body.id
   const medicineName = req.body.medicineName;
   const medDescription = req.body.medDescription;
   const medFrequency = req.body.medFrequency;
@@ -52,23 +56,29 @@ router.post("/edit-medication/:id", async (req, res) => {
   const result = await models.Medication.update(
     {
       medicineName: medicineName,
-      imageURL: uniqueFilename,
+      medImageUrl: uniqueFilename,
       medDescription: medDescription,
       medFrequency: medFrequency
     },
     { where: { medicineName: medicineName } }
   );
-  res.redirect("/medications");
+  res.render("medication");
 });
 //delete medication
-router.post("/delete-medicine", async (req, resp) => {
+router.post("/delete-medicine", async (req, res) => {
   let medicineId = parseInt(req.body.medicineId);
+  let medImageUrl = req.body.medImageUrl
   let result = await models.Medication.destroy({
     where: {
       id: medicineId
     }
-  });
-  res.redirect("/medication");
+  })
+   if (result) {
+     console.log(medImageUrl)
+     fs.unlinkSync(`${__basedir}/uploads/${medImageUrl}`)
+     console.log(result)
+    }
+  res.redirect("/medications");
 });
 
 
@@ -85,7 +95,7 @@ function uploadFile(req, callback){
 router.post('/upload', (req, res) =>{
   uploadFile(req, (photoURL) => { 
     photoURL = `/uploads/${photoURL}`
-    res.render('add-medication', {imageURL:photoURL, className:'medication-preview-image'})
+    res.render('add-medication', {medImageUrl:photoURL, className:'medication-preview-image'})
   })
 })
 
