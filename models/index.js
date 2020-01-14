@@ -8,6 +8,8 @@ const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
+
+
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -19,6 +21,13 @@ if (config.use_env_variable) {
     config
   );
 }
+
+// Nargiza's code
+//https://lorenstewart.me/2016/09/12/sequelize-table-associations-joins/
+
+// Nargiza's code
+
+
 
 fs.readdirSync(__dirname)
   .filter(file => {
