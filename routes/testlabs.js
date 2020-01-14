@@ -3,6 +3,7 @@ const router = express.Router()
 const formidable = require('formidable')
 const uuidv1 = require('uuid/v1')
 const models = require('../models')
+const fs = require('fs')
 
 let uniqueFilename = ''
 
@@ -13,7 +14,7 @@ router.get('/add-lab-result', async (req, res) => {
 router.post('/add-lab-result', async (req, res) => {
   let testdate = req.body.testdate
   let category = req.body.category
-  let memberId = 2
+  let memberId = 4
   
   let labresult = models.TestLab.build({
     test_date: testdate,
@@ -24,7 +25,7 @@ router.post('/add-lab-result', async (req, res) => {
   
   let persistedProduct = await labresult.save()
   if(persistedProduct != null) {
-    res.redirect('/labresults/2')
+    res.redirect('/labresults/4')
   } else {
     res.render('add-lab-result', {message: 'Unable to add labresult'})
   }
@@ -81,7 +82,7 @@ router.post('/update-labresult', async (req, res) => {
       id: labresultId
     }
   })
-  res.redirect('/labresults/2')
+  res.redirect('/labresults/4')
 })
 
 // DONE
@@ -93,21 +94,28 @@ router.get('/edit/:labresultId', async (req, res) => {
 
 router.post('/delete-labresult', async (req, res) => {
   let labresultId = parseInt(req.body.labresultId)
-  
+  let imageURL = req.body.imageURL
+
   let result = await models.TestLab.destroy({
     where: {
       id: labresultId
     }
   })
-  res.redirect('/labresults/2')
+  
+  if(result) {
+    console.log(imageURL)
+    fs.unlinkSync(`${__basedir}/uploads/${imageURL}`)
+    console.log(result)
+  }
+  res.redirect('/labresults/4')
 })
 
 // DONE
-router.get('/2', async (req, res) => {
+router.get('/4', async (req, res) => {
 
   let labresults = await models.TestLab.findAll({
     where: {
-      memberId: 2
+      memberId: 4
     }
   })
   

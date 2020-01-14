@@ -8,7 +8,6 @@
 <div class = "container">
   
   <div class = "list-group">
-
     <ul>
     {{#labresults}}
     <div>
@@ -20,6 +19,7 @@
     <p class="mb-1">{{test_date}}</p>
     
     <form action = "/labresults/delete-labresult" method="POST">
+      <input type="hidden" name= "imageURL" value="{{imageURL}}" />
       <input type="hidden" name="labresultId" value="{{id}}" />
       <button type="submit" class = "btn btn-danger">Delete</button>
     </form>
