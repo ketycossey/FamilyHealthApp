@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
       title: title,
       body: body
     })
-      res.render("/", {notes: notes})
+      res.render("notes", {notes: notes})
   });
 
 router.get("/", (req,res)=>{
