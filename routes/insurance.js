@@ -5,10 +5,19 @@ const uuidv1 = require('uuid/v1')
 const models = require('../models')
 const fs = require('fs')
 
-// hello world, I will hack this stuf to let e add oh my
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  let member_id = req.params.member_id
+  let result = await models.Insurance.findAll({
+    where: {
+      member_id: member_id
+    }
+  })
+  if(result != null) {
+    res.render('insurance')
+  } else {
+    res.render('insurance', {message: "No insurance uploaded"})
+  }
   
-  res.send("I am insurance page")
 })
 
 module.exports = router
