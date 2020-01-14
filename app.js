@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index')
 const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const labresultsRouter = require('./routes/testlabs')
+const profileRouter = require('./routes/profile')
 const PORT = process.env.PORT || 8080
 require('dotenv').config()
 const path = require('path')
@@ -54,6 +55,7 @@ app.use('/careproviders', careprovidersRouter)
 app.use('/families',checkAuthorization, familiesRouter)
 app.use('/members', checkAuthorization, membersRouter)
 app.use('/medications', medicationRouter)
+app.use('/profile', profileRouter)
 
 app.listen(PORT, ()=>{
     console.log("Server is running...")
