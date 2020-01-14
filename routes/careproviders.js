@@ -7,8 +7,7 @@ router.get("/", (req, res) => {
         where: {
             member_id: 1
         }
-    }).then(providers => 
-        res.render("careproviders", {providers: providers}))
+    }).then(providers => res.render("careproviders", {providers: providers}))
 })
 
 router.get("/add-careprovider", (req, res) => {
@@ -59,6 +58,7 @@ router.post("/edit-careprovider", (req, res) => {
 
 router.get("/edit-careprovider/:provider", (req, res) => {
     let id = req.params.provider
+    console.log(id)
     models.CareProviders.findByPk(id).then((myprovider) => {
         res.render("edit-careprovider", {myprovider: myprovider})
     })
