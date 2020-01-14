@@ -16,19 +16,12 @@
         <button class=" border-bottom border-primary btn btn-light">Add Member</button>
     </form>
     </div>
-<div class="col">
-<form method="get" action="/notes">
-        <button class=" border-bottom border-primary btn btn-light">Notes</button>
-    </form>
-    </div>    
 </div>
 
     <div class="row">
-<div class="col-lg-6 text-right">
-<ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush"></ul>
 {{#members}}
-
-  <li class="list-group-item my-1 bg-light rounded-left border-bottom border-primary">
+  <li class="list-group-item bg-light rounded-left border-bottom border-primary p-2">
   <b class="text-secondary">Name: </b>{{last_name}}, {{first_name}}<b class="text-secondary"> DOB:</b> {{birthday}}
   <div class="btn-group">
   <form method="post" action="members/delete/{{id}}">
@@ -40,12 +33,7 @@
   </div>
   </li>
     {{/members}}
-    </div>
 </ul>
-
-<div class="col-lg-6">
-d
-</div>
 
     </div>
 

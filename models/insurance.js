@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     member_id: DataTypes.INTEGER
   }, {});
   Insurance.associate = function(models) {
-    // associations can be defined here
+    models.Insurance.belongsTo(models.Family_member, {as:'Family_member', foreignKey: 'member_id'})
   };
   return Insurance;
 };
