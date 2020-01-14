@@ -1,0 +1,48 @@
+<!doctype html>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<html lang="en">
+ {{> head}}
+  <body>
+
+{{> navbar}}
+
+<div class="container-fluid p-1">
+    <div class="row">
+
+{{#members}}
+<div class="col-12 text-right">
+<ul class="list-group list-group-flush">
+  <li class="list-group-item bg-light">
+  <b>Name: </b>{{last_name}}, {{first_name}}<b> DOB:</b> {{birthday}}
+  <button class="material-icons btn btn-light">delete</button>
+  <button class="material-icons btn btn-light">edit</button>
+  </li>
+</ul>
+</div>
+    {{/members}}
+
+    </div>
+
+    <div class="row">
+
+<form method="get" action="./members/add">
+        <button class="dropdown-item">Add Member</button>
+    </form>
+</div>
+
+
+    </div>
+</div>
+
+
+
+</body>
+ {{> footer}}
+</html>
+
+
+<div class="list-group">
+    
+</div>
+

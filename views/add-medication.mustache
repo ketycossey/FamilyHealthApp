@@ -2,10 +2,12 @@
 <html lang="en">
  {{> head}}
  <body>
-<h1>Add medicine</h1>
+ {{> navbar}}
+
+<h1>Add Medication</h1>
 
     <div class="container">
-      <form action="/users/upload" method="POST" enctype="multipart/form-data">
+      <form action="/medications/upload" method="POST" enctype="multipart/form-data">
         <label>Photo</label>
         <input type="file" name="photo" />
         <button type="submit">Upload</button>
@@ -15,16 +17,19 @@
 
       <form action="/medications/add-medication" method="POST">
         <div class="form-group">
+
+
     <label>Medicine Name</label>
     <input type="text" name="medicineName" class="form-control" placeholder="Enter Medicine Name">
-  </div>
+     </div>
     <div class="form-group">
     <label>Description of Medicine</label>
-    <textarea class="form-control" name="medDescription"></textarea>
+    
+    <textarea class="form-control" name="medDescription" placeholder="Enter Medicine Description"></textarea>
     </div>
     <div class="form-group">
     <label>Frequency</label>
-    <input type="text" name="medFrequency" />
+    <input type="text" name="medFrequency" placeholder="Enter Frequency Here"/>
   </div>
 
   <button type="submit" class="btn btn-primary">Save</button>

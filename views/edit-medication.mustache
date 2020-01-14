@@ -1,8 +1,14 @@
 <!doctype html>
 <html lang="en">
+<head>
  {{> head}}
+ </head>
+
  </body>
-<h1>Edit  medicine</h1>
+ {{> navbar}}
+ <div class = "container">
+
+<h1>Edit  medication</h1>
 
     <div class="container">
       <form action="/users/upload" method="POST" enctype="multipart/form-data">
@@ -11,21 +17,21 @@
         <button type="submit">Upload</button>
       </form>
 
-      <img src="{{imageURL}}" class="{{className}}" />
+      <img src="/uploads/{{imageURL}}" class="{{className}}" />
 
-      <form action="/medications/edit-medicine" method="POST">
-        <input type="hidden" name="medId" value={{id}}/>
+      <form action="/medications/edit-medication {{id}}" method="POST">
+        <input type="hidden" name="medicineId" value={{id}}/>
         <div class="form-group">
     <label>Medicine Name</label>
     <input type="text" name="medicineName" class="form-control" placeholder="Enter Medicine Name">
   </div>
     <div class="form-group">
     <label>Description of Medicine</label>
-    <textarea class="form-control" name="medDescription"></textarea>
+    <textarea class="form-control" name="medDescription" placeholder='Enter Medicine Description'></textarea>
     </div>
     <div class="form-group">
     <label>Frequency</label>
-    <input type="text" name="medFrequency" />
+    <input type="text" name="medFrequency" placeholder='Enter Frequency Here'/>
   </div>
 
   <button type="submit" class="btn btn-primary">Save</button>
