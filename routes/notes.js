@@ -1,16 +1,16 @@
 const express = require("express")
 const router = express.Router()
 
-router.post('/', async(req,res)=>{
-    let title = req.body.title
-    let body = req.body.body
-    await model.notes.build({
-        title: title,
-        body: body
+//add note
+router.post("/", async (req, res) => {
+    let title = req.body.noteTitle;
+    let body = req.body.noteBody;
+    let notes = models.notes.build({
+      title: title,
+      body: body
     })
-    notes.save().then(savedNote=> res.render("notes"))
-
-})
+      res.render("notes", {notes: notes})
+  });
 
 router.get("/", (req,res)=>{
    res.render("notes")
