@@ -67,4 +67,6 @@ router.post('/delete/:memberId',(req,res) => {
     res.render('members')
 })
 
+
+
 module.exports = router
