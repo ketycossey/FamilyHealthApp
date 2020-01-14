@@ -26,9 +26,17 @@ router.get("/", async (req,res)=>{
   res.render('family', {families: families})
 })
 
-router.get("/", async (req,res)=>{
-  
+router.get("/", (req,res)=>{
+
+  models.Family_member.findAll({
+      where: {
+          family_id: req.session.family.userId
+      }
+  }).then(members => {
+    res.render("members", {members: members})
+  })
 })
 
+  
 
 module.exports = router
