@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Family_member.associate = function(models) {
     models.Family_member.belongsTo(models.family,{as: 'Family_member',foreignKey: 'family_id'})
-    //models.Family_member.hasMany(models.TestLab, { as: 'TestLab', foreignKey:'labId' })
+    models.Family_member.hasMany(models.TestLab, {as: 'TestLab', foreignKey:'memberId'})
+    models.Family_member.hasMany(models.Insurance, {as: 'Insurance', foreignKey:'member_id'})
+    models.Family_member.hasMany(models.Medication, {as:'Medication', foreignKey:'member_id'})
+    models.Family_member.hasMany(models.careProviders, {as: 'Care_provider', foreignKey:'member_id'})
   };
   return Family_member;
 };
