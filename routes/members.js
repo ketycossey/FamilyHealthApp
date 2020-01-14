@@ -29,6 +29,12 @@ router.post('/add/',(req,res) => {
     
 })
 
+router.get('/update/:member',(req,res) => {
+  
+    res.render('update', {id: req.params.member})
+
+})
+
 router.get('/add',(req,res) => {
   
     res.render('add', {id: req.session.family.userId})
@@ -42,11 +48,13 @@ router.post('/update/:memberId',(req,res) => {
         family_member: req.body.family_member,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        birthday: req.body.birthday}, {
+        birthday: req.body.birthday
+    }, {
             where: {
-                id: req.params.memberId
+                id: req.params.memberId,
             }
     })
+    res.redirect('/members')
 })
 
 //<Localhost>:<port>/members/delete/<memberId>
@@ -56,7 +64,7 @@ router.post('/delete/:memberId',(req,res) => {
             id: req.params.memberId
         }
     })
-    res.redirect('/members')
+    res.render('members')
 })
 
 module.exports = router
