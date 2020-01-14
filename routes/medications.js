@@ -13,10 +13,13 @@ router.get("/", (req, res) => {
   );
 });
 
+
 //add medication
 router.get("/add-medication", (req, res) => {
   res.render("add-medication",{className:"medicine-preview-image-invisible"});
 });
+
+
 router.post("/add-medication", async (req, res) => {
   let medicineName = req.body.medicineName;
   let medDescription = req.body.medDescription;
@@ -25,7 +28,7 @@ router.post("/add-medication", async (req, res) => {
 
   let medication = models.Medication.build({
     medicineName: medicineName,
-    imageURL: uniqueFilename,
+    medImageUrl: uniqueFilename,
     medDescription: medDescription,
     medFrequency: medFrequency
   });
@@ -33,7 +36,7 @@ router.post("/add-medication", async (req, res) => {
   if (persistedMedication != null) {
     res.redirect("/medications");
   } else {
-    res.render("/add-medicine", {message:"Unable to add medication" });
+    res.render("/add-medication", {message:"Unable to add medication" });
   }
 });
 //edit medication
@@ -52,7 +55,7 @@ router.post("/edit-medication/:id", async (req, res) => {
   const result = await models.Medication.update(
     {
       medicineName: medicineName,
-      imageURL: uniqueFilename,
+      medImageUrl: uniqueFilename,
       medDescription: medDescription,
       medFrequency: medFrequency
     },
@@ -85,7 +88,7 @@ function uploadFile(req, callback){
 router.post('/upload', (req, res) =>{
   uploadFile(req, (photoURL) => { 
     photoURL = `/uploads/${photoURL}`
-    res.render('add-medication', {imageURL:photoURL, className:'medication-preview-image'})
+    res.render('add-medication', {medImageUrl:photoURL, className:'medication-preview-image'})
   })
 })
 
