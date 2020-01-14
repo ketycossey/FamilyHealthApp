@@ -16,9 +16,10 @@ router.post('/', async (req,res)=>{
         bcrypt.compare(password, family.password, (error, result)=>{
             if(result){
                 if(req.session){
-                    req.session.family= {userId: family.id}
+                    req.session.family = {userId: family.id}
                     req.session.username = {username: family.username}
                     req.session.isAuth = true
+                    req.session.family.family_name = family.family_name
                     res.redirect('/members')
                 }
             }else{

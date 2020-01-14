@@ -18,8 +18,9 @@
 <p><h3>Medicine Name: {{medicineName}}</h3></p>
 <p>id:{{id}}</p>
 <div>
-<p> Photo:{{medImageUrl}}</p>
-<p> Description of Med:   {{medDescription}}</p>
+<img src="/uploads/{{medImageUrl}}" class="medicine-preview-image" style="max-height:200px; max-width:200px"/>
+</div>
+<p> Description of Med: {{medDescription}}</p>
 <p> Frequency: {{medFrequency}} </p>
 
 <form action='/medications/delete-medicine' method='POST'>
@@ -30,7 +31,7 @@
 {{/medications}}
 </ul>
 
-
+</div>
 
 </body>
 <html>
