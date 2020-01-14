@@ -71,7 +71,7 @@ router.post("/delete-medicine", async (req, resp) => {
       id: medicineId
     }
   });
-  res.redirect("/medication");
+  res.render("/medication");
 });
 
 
