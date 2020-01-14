@@ -71,4 +71,15 @@ router.post('/delete/:memberId',(req,res) => {
     res.redirect('members')
 })
 
+router.post("/member", async (req, res) => {
+    const member_id = req.body.member_id
+    const member = await models.Family_member.findOne({
+        where: {
+            id: member_id
+        }
+    })
+    console.log(member)
+    res.render("member", {member: member})
+})
+
 module.exports = router

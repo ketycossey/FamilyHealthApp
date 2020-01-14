@@ -1,0 +1,15 @@
+<html>
+
+<body>
+
+{{#member}}
+{{first_name}}
+
+<form action="/careproviders" method="POST">
+    <input name="member_id" type="hidden" value="{{id}}"/>
+    <button>Care Providers</button>
+</form>
+{{/member}}
+</body>
+
+</html>
