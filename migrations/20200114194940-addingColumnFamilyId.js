@@ -4,12 +4,14 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
       "notes", 
-      "family_id",{
-        type:Sequelize.INTEGER, allowNull:false, references: {
-          model: "families",
-          key: "id"
+      ["family_id"],{
+        type:'FOREIGN KEY', 
+         references:{
+           name: 'family_id_fk_in_notes',
+           table: 'families',
+           field: 'id' 
+         } 
         }
-      },
     )
     /*
       Add altering commands here.
@@ -22,7 +24,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
-      "notes", "family_id"
+      "notes", "family_id_fk_in_notes"
     )
     /*
       Add reverting commands here.
