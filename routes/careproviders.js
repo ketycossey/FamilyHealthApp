@@ -37,8 +37,9 @@ router.post("/delete-careprovider", (req, res) => {
             id: req.body.id
         }
     }).then( async () => {
-        const member_id = req.session.memberInfo.id
-        req.session.memberInfo = await getMember(member_id)
+        const id = req.body.id
+        const updatedProviders = req.session.memberInfo.Care_provider.filter(provider => provider.id != id)
+        req.session.memberInfo.Care_provider = updatedProviders
         res.redirect("/careproviders")
     })
 })
@@ -56,8 +57,17 @@ router.post("/edit-careprovider", (req, res) => {
             id: req.body.id
         }
     }).then( async () => {
-        const member_id = req.session.memberInfo.id
-        req.session.memberInfo = await getMember(member_id)
+        const id = req.body.id
+        let updatedProviders = req.session.memberInfo.Care_provider.filter(provider => provider.id != id)
+        let updatedProvider = req.session.memberInfo.Care_provider.filter(provider => provider.id == id)
+        updatedProvider[0].doctor_name = req.body.doctor_name
+        updatedProvider[0].address = req.body.address
+        updatedProvider[0].phone = req.body.phone
+        updatedProvider[0].email = req.body.email
+        updatedProvider[0].website = req.body.website
+        updatedProvider[0].specialty = req.body.specialty
+        updatedProviders.push(updatedProvider[0])
+        req.session.memberInfo.Care_provider = updatedProviders
         res.redirect("/careproviders")
     })
 })
