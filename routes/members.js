@@ -2,7 +2,9 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", (req,res)=>{
-
+    // const members = req.session.familyAll.family_members
+    // const name = req.session.familyAll.family_name
+    // res.render("members", {members: members, name: name})
     models.Family_member.findAll({
         where: {
             family_id: req.session.family.userId
@@ -79,8 +81,27 @@ router.post("/member", async (req, res) => {
     const member = await models.Family_member.findOne({
         where: {
             id: member_id
-        }
+        },
+        include: [
+            {
+                model: models.TestLab,
+                as: 'TestLab'
+            },
+            {
+                model: models.Insurance,
+                as: 'Insurance'
+            },
+            {
+                model: models.Medication,
+                as: 'Medication'
+            },
+            {
+                model: models.CareProviders,
+                as: 'Care_provider'
+            }
+        ]
     })
+    req.session.memberInfo = member
     res.render("member", {member: member})
 })
 
