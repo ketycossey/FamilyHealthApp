@@ -9,25 +9,30 @@
 
     {{#notes}}
 
-     <label>{{title}}</label>
+     <label><b>{{title}}</b></label>
      <p>{{body}}</p>
+      <form method="POST" action="/notes/delete-note">
+        <input name="id" type="hidden" value="{{id}}"/>
+        <button class="btn btn-danger btn-sm">Delete</button>
+     </form>
 
     {{/notes}}
 
     <h2>Add a Note</h2>
-    <form action="./notes" method="POST">
+    <form action="/notes" method="POST">
     <div class="form-group">
     <label>Title</label>
-    <input type="text" name="noteTitle" class="form-control" placeholder="Enter a Title">
+    <input type="text" name="title" class="form-control" placeholder="Enter a Title">
      </div>
     <div class="form-group">
     <label>Body</label>
-    <textarea class="form-control" name="noteBody" placeholder="Enter text"></textarea>
+    <textarea class="form-control" name="body" placeholder="Enter text"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
     </form>
-   
-  </div>
+    
+
+     </div>
   {{> footer}}
 </body>
 </html>

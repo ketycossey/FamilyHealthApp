@@ -1,8 +1,11 @@
 const express = require("express")
+const getMember = require("../functions/member")
 const router = express.Router()
 
 router.get("/", (req,res)=>{
-
+    // const members = req.session.familyAll.family_members
+    // const name = req.session.familyAll.family_name
+    // res.render("members", {members: members, name: name})
     models.Family_member.findAll({
         where: {
             family_id: req.session.family.userId
@@ -26,7 +29,7 @@ router.post('/add/',(req,res) => {
         family_id: req.session.family.userId
     })
     member.save().then(savedMember => console.log(savedMember))
-    
+    res.redirect("/members")
 })
 
 router.get('/update/:member',(req,res) => {
@@ -43,6 +46,7 @@ router.get('/add',(req,res) => {
   
     res.render('add', {id: req.session.family.userId})
 
+
 })
 
 //<Localhost>:<port>/members/update/<memberId>
@@ -57,8 +61,9 @@ router.post('/update/:memberId',(req,res) => {
             where: {
                 id: req.params.memberId,
             }
-    })
-    res.redirect('/members')
+    }).then(
+        res.redirect('/members')
+    )
 })
 
 //<Localhost>:<port>/members/delete/<memberId>
@@ -67,18 +72,15 @@ router.post('/delete/:memberId',(req,res) => {
         where: {
             id: req.params.memberId
         }
-    })
-    res.redirect('members')
+    }).then(
+        res.redirect('/members')
+    )
 })
 
 router.post("/member", async (req, res) => {
     const member_id = req.body.member_id
-    const member = await models.Family_member.findOne({
-        where: {
-            id: member_id
-        }
-    })
-    res.render("member", {member: member})
+    req.session.memberInfo = await getMember(member_id)
+    res.render("member", {member: req.session.memberInfo})
 })
 
 module.exports = router

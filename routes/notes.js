@@ -1,20 +1,35 @@
 const express = require("express")
 const router = express.Router()
 
-//add note
-router.post("/", async (req, res) => {
-    let title = req.body.noteTitle;
-    let body = req.body.noteBody;
-    let notes = models.notes.build({
-      title: title,
-      body: body
+
+router.post('/delete-note', (req,res)=>{
+    const id = req.body.id
+    models.notes.destroy({
+        where:{
+            id: id
+        }
+    }).then(()=>{
+        res.redirect('/notes')
     })
-      res.render("notes", {notes: notes})
-  });
+})
+router.post('/', (req,res)=>{
+    let notes= models.notes.build({
+        title: req.body.title,
+        body: req.body.body,
+        family_id: req.session.family.userId
+    })
+    notes.save().then(savedNote=>console.log(savedNote))
+    res.redirect("/notes")
+})
 
 router.get("/", (req,res)=>{
-   res.render("notes")
-
+    models.notes.findAll({
+        where:{
+            family_id: req.session.family.userId
+        }
+    }).then(notes =>{
+        res.render("notes", {notes: notes})
+    })
 })
 
 

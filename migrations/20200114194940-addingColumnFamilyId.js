@@ -5,11 +5,12 @@ module.exports = {
     return queryInterface.addColumn(
       "notes", 
       "family_id",{
-        type:Sequelize.INTEGER, allowNull:false, references: {
-          model: "families",
-          key: "id"
+        type: Sequelize.INTEGER, allowNull:false, 
+         references:{
+           model: 'families',
+           key: "id"
+         } 
         }
-      },
     )
     /*
       Add altering commands here.

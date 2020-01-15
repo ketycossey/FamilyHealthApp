@@ -1,17 +1,13 @@
 const express = require("express")
+const getMember = require("../functions/member")
 
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    models.CareProviders.findAll({
-        where: {
-            member_id: req.session.member_id
-        }
-    }).then(providers => res.render("careproviders", {providers: providers}))
+    res.render("careproviders", {providers: req.session.memberInfo.Care_provider})
 })
 
 router.post("/", (req, res) => {
-    req.session.member_id = req.body.member_id
     res.redirect("/careproviders")
 })
 
@@ -27,9 +23,10 @@ router.post("/add-careprovider", (req, res) => {
         email: req.body.email,
         website: req.body.website,
         specialty: req.body.specialty,
-        member_id: req.session.member_id
+        member_id: req.session.memberInfo.id
     })
-    provider.save().then(() => {
+    provider.save().then( async (newprovider) => {
+        req.session.memberInfo.Care_provider.push(newprovider)
         res.redirect("/careproviders")
     })
 })
@@ -39,7 +36,10 @@ router.post("/delete-careprovider", (req, res) => {
         where: {
             id: req.body.id
         }
-    }).then(() => {
+    }).then( async () => {
+        const id = req.body.id
+        const updatedProviders = req.session.memberInfo.Care_provider.filter(provider => provider.id != id)
+        req.session.memberInfo.Care_provider = updatedProviders
         res.redirect("/careproviders")
     })
 })
@@ -56,17 +56,26 @@ router.post("/edit-careprovider", (req, res) => {
         where: {
             id: req.body.id
         }
-    }).then(() => {
+    }).then( async () => {
+        const id = req.body.id
+        let updatedProviders = req.session.memberInfo.Care_provider.filter(provider => provider.id != id)
+        let updatedProvider = req.session.memberInfo.Care_provider.filter(provider => provider.id == id)
+        updatedProvider[0].doctor_name = req.body.doctor_name
+        updatedProvider[0].address = req.body.address
+        updatedProvider[0].phone = req.body.phone
+        updatedProvider[0].email = req.body.email
+        updatedProvider[0].website = req.body.website
+        updatedProvider[0].specialty = req.body.specialty
+        updatedProviders.push(updatedProvider[0])
+        req.session.memberInfo.Care_provider = updatedProviders
         res.redirect("/careproviders")
     })
 })
 
 router.get("/edit-careprovider/:provider", (req, res) => {
     let id = req.params.provider
-    console.log(id)
-    models.CareProviders.findByPk(id).then((myprovider) => {
-        res.render("edit-careprovider", {myprovider: myprovider})
-    })
+    const myprovider = req.session.memberInfo.Care_provider.filter(provider => provider.id == id)
+    res.render("edit-careprovider", {myprovider: myprovider})
 })
 
 module.exports = router
