@@ -40,37 +40,72 @@ router.post("/add-medication", async (req, res) => {
     res.render("/add-medication", {message:"Unable to add medication" });
   }
 });
-//edit medication
-router.get("/edit-medication/:id", async (req, res) => {
-  let medicationId = req.params.id;
-  let medication = await models.Medication.findByPk(medicationId);
-  res.render("edit-medication", medication.dataValues);
-});
 
-router.post("/edit-medication/:id", async (req, res) => {
-  const id = req.body.id
+
+
+//edit medication
+
+
+router.post('/upload/edit-medication/:id',(req,res) => {
+
+  uploadFile(req, async (photoURL) => {
+
+    let medId = parseInt(req.params.medId)
+    let medication = await models.Medication.findByPk(medId)
+
+    let response = medication.dataValues
+    response.imageURL = photoURL
+
+    res.render('edit-medication',response)
+  })
+
+})
+
+ router.get('/medications/:medId',async (req,res) => {
+
+  let medId = req.params.medId
+  let medication = await models.Medication.findByPk(medId)
+  res.render('edit-medication', medication.dataValues)
+
+ })
+
+
+
+router.get("/edit-medication/:medId", async (req, res) => {
+  uploadFile(req, async (photoURL)=>{
+
+    let medId = parseInt(req.params.medId)
+    let medication = await models.Medication.findByPk(medicationId);
+    res.render("edit-medication", medication.dataValues)
+  })
+})
+  ;
+
+router.post ("/edit-medication", async (req, res) => {
+  const medId = req.body.medId
   const medicineName = req.body.medicineName;
   const medDescription = req.body.medDescription;
   const medFrequency = req.body.medFrequency;
 
-  const result = await models.Medication.update(
-    {
+  const result = await models.Medication.update({
       medicineName: medicineName,
       medImageUrl: uniqueFilename,
       medDescription: medDescription,
       medFrequency: medFrequency
-    },
-    { where: { medicineName: medicineName } }
-  );
-  res.render("medication");
+    },{ where: { id: medId }
+  
+  });
+  res.redirect("/medication");
 });
+
+
 //delete medication
 router.post("/delete-medicine", async (req, res) => {
-  let medicineId = parseInt(req.body.medicineId);
+  let medId = parseInt(req.body.medId);
   let medImageUrl = req.body.medImageUrl
   let result = await models.Medication.destroy({
     where: {
-      id: medicineId
+      id: medId
     }
   })
    if (result) {
