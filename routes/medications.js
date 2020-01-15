@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const formidable = require('formidable')
-const uuidv1 = require('uuid/v1')
-const models = require('../models')
-const fs = require('fs')
+const formidable = require("formidable");
+const uuidv1 = require("uuid/v1");
+const models = require("../models");
+const fs = require("fs");
 
-
-let uniqueFilename = ''
+let uniqueFilename = "";
 
 router.get("/", (req, res) => {
   models.Medication.findAll().then(medications =>
@@ -14,15 +13,17 @@ router.get("/", (req, res) => {
   );
 });
 
-
 //add medication
-router.get("/add-medication", (req, res) => {
-  res.render("add-medication",{className:"medicine-preview-image-invisible"});
+router.get("/add-medication/:member_id", (req, res) => {
+  res.render("add-medication", {
+    member_id: req.params.member_id,
+    className: "medicine-preview-image-invisible"
+  });
 });
 
-
-router.post("/add-medication", async (req, res) => {
+router.post("/add-medication/:member_id", async (req, res) => {
   let medicineName = req.body.medicineName;
+  let member_id=req.params.member_id
   let medDescription = req.body.medDescription;
   let medFrequency = req.body.medFrequency;
   console.log(medicineName);
@@ -31,13 +32,15 @@ router.post("/add-medication", async (req, res) => {
     medicineName: medicineName,
     medImageUrl: uniqueFilename,
     medDescription: medDescription,
-    medFrequency: medFrequency
+    medFrequency: medFrequency,
+    member_id:member_id
   });
+  console.log(member_id)
   let persistedMedication = await medication.save();
   if (persistedMedication != null) {
     res.redirect("/medications");
   } else {
-    res.render("/add-medication", {message:"Unable to add medication" });
+    res.render("/add-medication", { message: "Unable to add medication" });
   }
 });
 //edit medication
@@ -48,7 +51,7 @@ router.get("/edit-medication/:id", async (req, res) => {
 });
 
 router.post("/edit-medication/:id", async (req, res) => {
-  const id = req.body.id
+  const id = req.params.id;
   const medicineName = req.body.medicineName;
   const medDescription = req.body.medDescription;
   const medFrequency = req.body.medFrequency;
@@ -60,43 +63,49 @@ router.post("/edit-medication/:id", async (req, res) => {
       medDescription: medDescription,
       medFrequency: medFrequency
     },
-    { where: { medicineName: medicineName } }
+    { where: {id: id},  }
   );
   res.render("medication");
 });
 //delete medication
 router.post("/delete-medicine", async (req, res) => {
   let medicineId = parseInt(req.body.medicineId);
-  let medImageUrl = req.body.medImageUrl
+  let medImageUrl = req.body.medImageUrl;
   let result = await models.Medication.destroy({
     where: {
       id: medicineId
     }
-  })
-   if (result) {
-     console.log(medImageUrl)
-     fs.unlinkSync(`${__basedir}/uploads/${medImageUrl}`)
-     console.log(result)
-    }
+  });
+  if (result) {
+    console.log("this is sparta" + medImageUrl);
+    fs.unlinkSync(`${__basedir}/uploads/${medImageUrl}`);
+    console.log(result);
+  }
   res.redirect("/medications");
 });
 
-
-function uploadFile(req, callback){
-  new formidable.IncomingForm().parse(req).on('fileBegin', (name, file) =>{
-    uniqueFilename=`${uuidv1()}.${file.name.split('.').pop()}`
-    file.name = uniqueFilename
-    file.path = __basedir + '/uploads/' + file.name
-  })
-  .on('file',(name, file) => {
-    callback(file.name)
-  })
+function uploadFile(req, callback) {
+  new formidable.IncomingForm()
+    .parse(req)
+    .on("fileBegin", (name, file) => {
+      uniqueFilename = `${uuidv1()}.${file.name.split(".").pop()}`;
+      file.name = uniqueFilename;
+      file.path = __basedir + "/uploads/" + file.name;
+    })
+    .on("file", (name, file) => {
+      callback(file.name);
+    });
 }
-router.post('/upload', (req, res) =>{
-  uploadFile(req, (photoURL) => { 
-    photoURL = `/uploads/${photoURL}`
-    res.render('add-medication', {medImageUrl:photoURL, className:'medication-preview-image'})
-  })
-})
+router.post("/upload/:member_id", (req, res) => {
+  let member_id= req.params.member_id
+  uploadFile(req, photoURL => {
+    photoURL = `/uploads/${photoURL}`;
+    res.render("add-medication", {
+     member_id: member_id,
+      medImageUrl: photoURL,
+      className: "medication-preview-image"
+    });
+  });
+});
 
 module.exports = router;
