@@ -8,15 +8,17 @@ const fs = require("fs");
 let uniqueFilename = "";
 
 router.get("/", (req, res) => {
+  console.log(req.session.memberInfo.id)
   models.Medication.findAll().then(medications =>
     res.render("medication", { medications: medications })
-  );
+  
+    );
 });
 
 //add medication
-router.get("/add-medication/:member_id", (req, res) => {
+router.get("/add-medication", (req, res) => {
   res.render("add-medication", {
-    member_id: req.params.member_id,
+    member_id: req.session.memberInfo.id,
     className: "medicine-preview-image-invisible"
   });
 });
