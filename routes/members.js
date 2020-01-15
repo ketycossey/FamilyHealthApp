@@ -1,4 +1,5 @@
 const express = require("express")
+const getMember = require("../functions/member")
 const router = express.Router()
 
 router.get("/", (req,res)=>{
@@ -78,31 +79,8 @@ router.post('/delete/:memberId',(req,res) => {
 
 router.post("/member", async (req, res) => {
     const member_id = req.body.member_id
-    const member = await models.Family_member.findOne({
-        where: {
-            id: member_id
-        },
-        include: [
-            {
-                model: models.TestLab,
-                as: 'TestLab'
-            },
-            {
-                model: models.Insurance,
-                as: 'Insurance'
-            },
-            {
-                model: models.Medication,
-                as: 'Medication'
-            },
-            {
-                model: models.CareProviders,
-                as: 'Care_provider'
-            }
-        ]
-    })
-    req.session.memberInfo = member
-    res.render("member", {member: member})
+    req.session.memberInfo = await getMember(member_id)
+    res.render("member", {member: req.session.memberInfo})
 })
 
 module.exports = router
