@@ -6,16 +6,18 @@ const models = require('../models')
 const fs = require('fs')
 
 router.get('/', async (req, res) => {
-  let member_id = req.params.member_id
-  let result = await models.Insurance.findAll({
+  //let member_id = req.body.member_id
+  //console.log(member_id)
+  let insurance = await models.Insurance.findAll({
     where: {
       member_id: member_id
     }
   })
-  if(result != null) {
-    res.render('insurance')
+  
+  if(insurance != null) {
+    res.render('insurance', {insurance: insurance})
   } else {
-    res.render('insurance', {message: "No insurance uploaded"})
+    res.render('insurance', {message: "Upload insurance to display", insurance: insurance})
   }
   
 })
