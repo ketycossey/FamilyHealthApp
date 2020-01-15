@@ -13,15 +13,27 @@
    <img src="/uploads/{{image_url}}" class="{{className}}">
   </div>
 
+<<<<<<< HEAD
     <form action="/careproviders" method="POST">
     <input name="member_id" type="hidden" value="{{id}}"/>
+=======
+<form action="/careproviders" method="GET">
+>>>>>>> master
     <button>Care Providers</button>
 </form>
+
+
+<a href="/insurance">
+    <button type="submit">Insurance</button>
+</a>
+
+
 
 <form action="/medications" method="GET">
     <input name="member_id" type="hidden" value="{{id}}"/>
     <button>Medications</button>
 </form>
+
 {{/member}}
 </body>
 
