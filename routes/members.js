@@ -78,7 +78,6 @@ router.post("/member", async (req, res) => {
             id: member_id
         }
     })
-    console.log(member)
     res.render("member", {member: member})
 })
 

@@ -2,13 +2,17 @@ const express = require("express")
 
 const router = express.Router()
 
-router.post("/", (req, res) => {
-    let member_id = req.body.member_id
+router.get("/", (req, res) => {
     models.CareProviders.findAll({
         where: {
-            member_id: member_id
+            member_id: req.session.member_id
         }
     }).then(providers => res.render("careproviders", {providers: providers}))
+})
+
+router.post("/", (req, res) => {
+    req.session.member_id = req.body.member_id
+    res.redirect("/careproviders")
 })
 
 router.get("/add-careprovider", (req, res) => {
@@ -23,7 +27,7 @@ router.post("/add-careprovider", (req, res) => {
         email: req.body.email,
         website: req.body.website,
         specialty: req.body.specialty,
-        member_id: 1
+        member_id: req.session.member_id
     })
     provider.save().then(() => {
         res.redirect("/careproviders")
