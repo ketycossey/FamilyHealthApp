@@ -67,7 +67,7 @@ router.post("/edit-medication/:id", async (req, res) => {
     },
     { where: {id: id},  }
   );
-  res.render("medication");
+  res.redirect("/medications");
 });
 //delete medication
 router.post("/delete-medicine", async (req, res) => {
