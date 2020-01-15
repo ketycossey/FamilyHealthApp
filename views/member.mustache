@@ -5,9 +5,13 @@
 {{#member}}
 {{first_name}}
 
-<form action="/careproviders" method="POST">
-    <input name="member_id" type="hidden" value="{{id}}"/>
+<form action="/careproviders" method="GET">
     <button>Care Providers</button>
+</form>
+
+<form action="/medications" method="GET">
+    <input name="member_id" type="hidden" value="{{id}}"/>
+    <button>Medications</button>
 </form>
 
 <form action="/medications" method="GET">

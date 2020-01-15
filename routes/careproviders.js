@@ -7,10 +7,6 @@ router.get("/", (req, res) => {
     res.render("careproviders", {providers: req.session.memberInfo.Care_provider})
 })
 
-router.post("/", (req, res) => {
-    res.redirect("/careproviders")
-})
-
 router.get("/add-careprovider", (req, res) => {
     res.render("add-careprovider")
 })
