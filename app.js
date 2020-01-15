@@ -60,7 +60,7 @@ app.use('/insurance', insuranceRouter)
 app.use('/careproviders', careprovidersRouter)
 app.use('/families',checkAuthorization, familiesRouter)
 app.use('/members', checkAuthorization, membersRouter)
-app.use('/medications', medicationRouter)
+app.use('/medications',checkAuthorization, medicationRouter)
 app.use('/profile', profileRouter)
 app.use('/notes', notesRouter)
 

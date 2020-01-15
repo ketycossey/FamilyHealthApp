@@ -24,6 +24,7 @@
 <p> Frequency: {{medFrequency}} </p>
 
 <form action='/medications/delete-medicine' method='POST'>
+<input type="hidden" value="{{medImageUrl}}" name="medImageUrl" />
 <input type='hidden' name="medicineId" value= "{{id}}" />
 <button type = "submit">Delete</button>
 </form>
