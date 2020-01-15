@@ -9,11 +9,11 @@
 
     {{#notes}}
 
-     <label>{{title}}</label>
+     <label><b>{{title}}</b></label>
      <p>{{body}}</p>
       <form method="POST" action="/notes/delete-note">
         <input name="id" type="hidden" value="{{id}}"/>
-        <button>Delete</button>
+        <button class="btn btn-danger btn-sm">Delete</button>
      </form>
 
     {{/notes}}
