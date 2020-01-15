@@ -13,7 +13,6 @@ const registerRouter = require('./routes/register')
 const loginRouter = require('./routes/login')
 const labresultsRouter = require('./routes/testlabs')
 const notesRouter = require('./routes/notes')
-
 const insuranceRouter = require('./routes/insurance')
 
 const profileRouter = require('./routes/profile')

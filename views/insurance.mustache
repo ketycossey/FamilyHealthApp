@@ -6,7 +6,7 @@
   {{> navbar}}
   
 <div class = "container">
-  
+  <h1> INSURANCE PAGE </h1>
   <div class = "list-group">
     <ul>
     {{#insurance}}
@@ -20,11 +20,12 @@
     
     <form action = "/labresults/delete-labresult" method="POST">
       <input type="hidden" name= "front_pic" value="{{front_pic}}" />
+      <input type="hidden" name="back_pic" value="{{back_pic}}" />
       <input type="hidden" name="insurance_id" value="{{id}}" />
       <button type="submit" class = "btn btn-danger">Delete</button>
     </form>
   
-   <a href="/labresults/edit/{{id}}"><button class="btn btn-info">Edit</button></a>
+   <a href="/insurance/edit/{{id}}"><button class="btn btn-info">Edit</button></a>
   
    {{/insurance}}
 
