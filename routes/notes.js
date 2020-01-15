@@ -6,7 +6,7 @@ const router = express.Router()
 router.post("/", (req, res) => {
     let title = req.body.title;
     let body = req.body.body;
-    let family_id = 
+    let family_id = req.session.family.userId
     let notes = models.notes.build({
       title: title,
       body: body

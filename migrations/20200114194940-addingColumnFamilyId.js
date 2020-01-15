@@ -4,12 +4,11 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
       "notes", 
-      ["family_id"],{
-        type:'FOREIGN KEY', 
+      "family_id",{
+        type: Sequelize.INTEGER, allowNull:false, 
          references:{
-           name: 'family_id_fk_in_notes',
-           table: 'families',
-           field: 'id' 
+           model: 'families',
+           key: "id"
          } 
         }
     )
@@ -24,7 +23,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
-      "notes", "family_id_fk_in_notes"
+      "notes", "family_id"
     )
     /*
       Add reverting commands here.
