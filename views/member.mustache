@@ -16,7 +16,12 @@
     <form action="/careproviders" method="POST">
     <input name="member_id" type="hidden" value="{{id}}"/>
     <button>Care Providers</button>
-</>
+</form>
+
+<form action="/medications" method="GET">
+    <input name="member_id" type="hidden" value="{{id}}"/>
+    <button>Medications</button>
+</form>
 {{/member}}
 </body>
 
