@@ -14,13 +14,9 @@ router.post("/", async (req, res) => {
       
   });
 
-  router.get("/", async (req, res) => {
-   let notes = await models.notes.findAll({
-        where: {
-            family_id: req.session.family.userId
-        }
-    })
-    res.render('notes', {notes: notes})
+  router.get("/",(req, res) => {
+    const family_id = req.session.family.userId
+    models.notes.findAll().then(notes => res.render("notes", {family_id: family_id, notes: notes}))
   })
 
 
