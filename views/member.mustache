@@ -4,11 +4,19 @@
 
 {{#member}}
 {{first_name}}
+   <form action="member/upload/{{id}}" method="POST" enctype="multipart/form-data">
+  <label>Photo</label>
+    <input type="file" name="photo" />
+    <button type='submit'>Upload</button>
+    </form>
+   <div>
+   <img src="/uploads/{{image_url}}" class="{{className}}">
+  </div>
 
-<form action="/careproviders" method="POST">
+    <form action="/careproviders" method="POST">
     <input name="member_id" type="hidden" value="{{id}}"/>
     <button>Care Providers</button>
-</form>
+</>
 {{/member}}
 </body>
 
