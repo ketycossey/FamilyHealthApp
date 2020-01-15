@@ -2,10 +2,11 @@ const express = require("express")
 
 const router = express.Router()
 
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
+    let member_id = req.body.member_id
     models.CareProviders.findAll({
         where: {
-            member_id: 1
+            member_id: member_id
         }
     }).then(providers => res.render("careproviders", {providers: providers}))
 })
