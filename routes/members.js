@@ -77,8 +77,8 @@ router.post('/delete/:memberId',(req,res) => {
     )
 })
 
-router.post("/member", async (req, res) => {
-    const member_id = req.body.member_id
+router.get("/:id", async (req, res) => {
+    const member_id = req.params.id
     req.session.memberInfo = await getMember(member_id)
     res.render("member", {member: req.session.memberInfo})
 })
