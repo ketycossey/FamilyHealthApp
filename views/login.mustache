@@ -1,30 +1,31 @@
 <!doctype html>
 <html lang="en">
  {{> head}}
-  <body>
-  <div id="loginBg" class="container">
+<body>
+ <div id="loginBg">
+  <div id="logContainer" class="container">
 
     <div class="col-8 offset-2">
-
-      <h1> LOGIN </h1>
+      <img id="logo" src="/familyHealth-logo.png"  class="d-inline-block align-top" />
       <form action="/login" method="POST">
           <div class="form-group">
-            <label for="exampleInputEmail1">User Name</label>
+            <label id="labels" for="exampleInputEmail1">User Name</label>
             <input type="text" name="username" class="form-control border-bottom" id="exampleInputEmail1"  placeholder="Enter user name">
 
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label id="labels" for="exampleInputPassword1">Password</label>
             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
           </div>
 
-          <button type="submit" class="btn btn-primary">Login</button>
+          <button id="buttons" type="submit" class="btn btn-primary">Login</button>
         </form>
-        <a href="/register"> Not a member yet? Create an account </a>
+        <a id="question" href="/register"> Not a member yet? Create an account </a>
 
         {{#message}}
         <p> {{message}}</p>
-        {{/message}}  
+        {{/message}} 
+  </div>       
 
       </body>
 
