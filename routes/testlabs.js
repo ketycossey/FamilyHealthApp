@@ -7,6 +7,15 @@ const fs = require('fs')
 
 let uniqueFilename = ''
 
+router.get('/', async (req, res) => {
+  let labresults = await models.TestLab.findAll({
+    where: {
+      memberId: req.session.memberInfo.id
+    }
+  })
+  res.render('labresults', {labresults: labresults})
+})
+
 router.get('/add-lab-result', async (req, res) => {
   res.render("add-lab-result")
 })
@@ -14,18 +23,18 @@ router.get('/add-lab-result', async (req, res) => {
 router.post('/add-lab-result', async (req, res) => {
   let testdate = req.body.testdate
   let category = req.body.category
-  let memberId = 4
+  
   
   let labresult = models.TestLab.build({
     test_date: testdate,
     category: category,
-    memberId: memberId,
+    memberId: req.session.memberInfo.id,
     imageURL: uniqueFilename
   })
   
   let persistedProduct = await labresult.save()
   if(persistedProduct != null) {
-    res.redirect('/labresults/4')
+    res.redirect('/labresults')
   } else {
     res.render('add-lab-result', {message: 'Unable to add labresult'})
   }
@@ -53,7 +62,7 @@ router.post('/upload', (req, res) => {
   })
 })
 
-// WORKING ON
+// Edit page
 router.post('/upload/edit/:labId', (req, res) => {
   uploadFile(req, async (photoURL) => {
     
@@ -67,6 +76,7 @@ router.post('/upload/edit/:labId', (req, res) => {
   
 })
 
+// edit page
 router.post('/update-labresult', async (req, res) => {
   
   const labresultId = req.body.labresultId
@@ -82,10 +92,9 @@ router.post('/update-labresult', async (req, res) => {
       id: labresultId
     }
   })
-  res.redirect('/labresults/4')
+  res.redirect('/labresults')
 })
 
-// DONE
 router.get('/edit/:labresultId', async (req, res) => {
   let labresultId = req.params.labresultId
   let labresult = await models.TestLab.findByPk(labresultId)
@@ -95,7 +104,6 @@ router.get('/edit/:labresultId', async (req, res) => {
 router.post('/delete-labresult', async (req, res) => {
   let labresultId = parseInt(req.body.labresultId)
   let imageURL = req.body.imageURL
-
   let result = await models.TestLab.destroy({
     where: {
       id: labresultId
@@ -103,23 +111,9 @@ router.post('/delete-labresult', async (req, res) => {
   })
   
   if(result) {
-    console.log(imageURL)
     fs.unlinkSync(`${__basedir}/uploads/${imageURL}`)
-    console.log(result)
   }
-  res.redirect('/labresults/4')
-})
-
-// DONE
-router.get('/4', async (req, res) => {
-
-  let labresults = await models.TestLab.findAll({
-    where: {
-      memberId: 4
-    }
-  })
-  
-  res.render('labresults', {labresults: labresults})
+  res.redirect('/labresults')
 })
 
 module.exports = router

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+ {{> head}}
+  <body>
+  
+  {{> navbar}}
+  
+  <div class = "container">
+    <form action="/insurance/upload" method="POST" enctype="multipart/form-data">
+      <label> Front Picture </label>
+      <input type="file" name="photo1">
+      <label> Back Picture </label>
+      <input type="file" name="photo2">
+      <button type="submit"> Upload </button>
+    </form>
+    
+    <img src='{{imageURLfront}}' class="{{className}}"> 
+    <img src='{{imageURLback}}' class="{{className}}">
+    
+    <form action="/insurance/add-insurance" method = "POST">
+      <div class = "form-group">
+        <label> Care Provider Name</label>
+        <input type="text" name="careprovider" class="form-control" placeholder = "Enter Care Provider Name" />
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    
+    <div>
+      {{#message}}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+      {{/message}}
+    </div>
+    
+    
+  </div>
+  {{> footer}}
+  </body>
+</html>
