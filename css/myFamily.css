@@ -1,0 +1,15 @@
+#signout{
+    color:#29c2e5; 
+}
+
+.navbar-nav{
+    float: left;
+}
+
+#Bg{
+    margin:0 !important;  
+    background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
+    background-size: cover;
+    height: 100vh;
+}
+
