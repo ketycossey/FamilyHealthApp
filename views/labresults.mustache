@@ -6,7 +6,10 @@
   {{> navbar}}
   
 <div class = "container">
-  
+<a href="/labresults/add-lab-result"> <button>Add Labresults </button></a>
+  {{^labresults}}
+  <div class="alert alert-danger" role="alert">Add lab results to display any</div>
+  {{/labresults}}
   <div class = "list-group">
     <ul>
     {{#labresults}}

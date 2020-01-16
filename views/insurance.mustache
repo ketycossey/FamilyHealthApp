@@ -7,7 +7,12 @@
   
 <div class = "container">
   <h1> INSURANCE PAGE </h1>
+  <a href="/insurance/add-insurance"> <button>Add Insurance </button></a>
   <div class = "list-group">
+    {{^insurance}}
+    <div class="alert alert-danger" role="alert" >Upload your insurance to display it</div>
+    {{/insurance}}
+    
     <ul>
     {{#insurance}}
     <div>

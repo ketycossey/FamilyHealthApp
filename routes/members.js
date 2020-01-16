@@ -5,6 +5,7 @@ const router = express.Router()
 router.get("/", (req,res)=>{
     // const members = req.session.familyAll.family_members
     // const name = req.session.familyAll.family_name
+    
     // res.render("members", {members: members, name: name})
     models.Family_member.findAll({
         where: {
@@ -28,8 +29,8 @@ router.post('/add/',(req,res) => {
         birthday: req.body.birthday,
         family_id: req.session.family.userId
     })
-    member.save().then(savedMember => console.log(savedMember))
-    res.redirect("/members")
+    member.save().then(savedMember => res.redirect("/members") /*console.log(savedMember)*/)
+    // res.redirect("/members")
 })
 
 router.get('/update/:member',(req,res) => {
