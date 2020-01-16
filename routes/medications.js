@@ -8,22 +8,26 @@ const fs = require("fs");
 let uniqueFilename = "";
 
 router.get("/", (req, res) => {
-  models.Medication.findAll().then(medications =>
-    res.render("medication", { medications: medications })
-  );
+  models.Medication.findAll({
+    where:{ member_id:req.session.memberInfo.id}
+   }).then(medications => {
+    req.session.memberInfo.Medication=medications
+    console.log(req.session.memberInfo);
+    res.render("medication", { medications: req.session.memberInfo.Medication });
+  });
+
+  // console.log(req.session.memberInfo);
+  //   res.render("medication", { medications: req.session.memberInfo.Medication });
 });
 
 //add medication
-router.get("/add-medication/:member_id", (req, res) => {
-  res.render("add-medication", {
-    member_id: req.params.member_id,
-    className: "medicine-preview-image-invisible"
-  });
+router.get("/add-medication", (req, res) => {
+  res.render("add-medication", { memberId: 23 });
 });
 
-router.post("/add-medication/:member_id", async (req, res) => {
+router.post("/add-medication", async (req, res) => {
   let medicineName = req.body.medicineName;
-  let member_id=req.params.member_id
+  //let member_id = req.session.memberInfo.id;
   let medDescription = req.body.medDescription;
   let medFrequency = req.body.medFrequency;
   console.log(medicineName);
@@ -33,10 +37,10 @@ router.post("/add-medication/:member_id", async (req, res) => {
     medImageUrl: uniqueFilename,
     medDescription: medDescription,
     medFrequency: medFrequency,
-    member_id:member_id
+    member_id: req.session.memberInfo.id
   });
-  console.log(member_id)
   let persistedMedication = await medication.save();
+  req.session.memberInfo.Medication.push(persistedMedication)
   if (persistedMedication != null) {
     res.redirect("/medications");
   } else {
@@ -63,9 +67,9 @@ router.post("/edit-medication/:id", async (req, res) => {
       medDescription: medDescription,
       medFrequency: medFrequency
     },
-    { where: {id: id},  }
+    { where: { id: id } }
   );
-  res.render("medication");
+  res.redirect("/medications");
 });
 //delete medication
 router.post("/delete-medicine", async (req, res) => {
@@ -75,7 +79,9 @@ router.post("/delete-medicine", async (req, res) => {
     where: {
       id: medicineId
     }
-  });
+  }); 
+  const updatedMedicine = req.session.memberInfo.Medication.filter(medicine => medicine.id != medicineId)
+  req.session.memberInfo.Medication = updatedMedicine
   if (result) {
     console.log("this is sparta" + medImageUrl);
     fs.unlinkSync(`${__basedir}/uploads/${medImageUrl}`);
@@ -96,16 +102,27 @@ function uploadFile(req, callback) {
       callback(file.name);
     });
 }
-router.post("/upload/:member_id", (req, res) => {
-  let member_id= req.params.member_id
+router.post("/upload/:memberId", (req, res) => {
+ // let member_id = req.params.memberId;
   uploadFile(req, photoURL => {
     photoURL = `/uploads/${photoURL}`;
     res.render("add-medication", {
-     member_id: member_id,
+      //member_id: member_id,
       medImageUrl: photoURL,
       className: "medication-preview-image"
     });
   });
 });
 
+router.post("/upload/edit-medication/:id", (req, res)=>{
+  uploadFile(req, async (photoURL) => {
+    
+    let medicineId= parseInt(req.params.id)
+    let medResult = await models.Medication.findByPk(medicineId)
+    
+    let response = medResult.dataValues
+    response.medImageUrl = photoURL
+    res.render('edit-medication', response)
+  })
+})
 module.exports = router;

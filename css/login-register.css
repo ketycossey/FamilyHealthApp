@@ -1,0 +1,51 @@
+
+
+#loginBg{
+    margin:0 !important;  
+    background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
+    background-size: cover;
+    height: 100vh;
+}
+#logContainer{
+    margin-top: 30%;
+    width: 70vw;
+    padding: 5%;
+    background-color:rgb(246, 248, 249);
+    box-shadow: 2px 3px 2px #7d7c7c;
+}
+#regContainer{
+    width: 70vw;
+    padding: 5%;
+    background-color:rgb(246, 248, 249);
+    box-shadow: 2px 3px 2px #acacac;
+}
+#buttons{
+    background-color: #29c2e5;
+    border-style: none;
+}
+#question{
+    color: #26304e;
+    font-size: 12px;
+}
+#logo{
+    position: relative;
+    width: 200px;
+    height: auto;
+}
+#labels{
+    color: #26304e;
+}
+
+@media screen and (min-width: 800px){
+    #logContainer{
+        margin-top: 10%;
+    }
+    #logo{
+        left: 60px;
+        position: relative;
+        width: 300px;
+        height: auto;
+    
+    }
+        
+}
