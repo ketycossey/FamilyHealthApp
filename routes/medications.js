@@ -8,23 +8,20 @@ const fs = require("fs");
 let uniqueFilename = "";
 
 router.get("/", (req, res) => {
-  models.Medication.findAll().then(medications =>
-    res.render("medication", { medications: medications })
-  
-    );
+  models.Medication.findAll().then(medications => {
+    console.log(req.session.memberInfo);
+    res.render("medication", { medications: medications });
+  });
 });
 
 //add medication
 router.get("/add-medication", (req, res) => {
-  res.render("add-medication", {
-    member_id: req.session.memberInfo.id,
-    className: "medicine-preview-image-invisible"
-  });
+  res.render("add-medication", { memberId: 23 });
 });
 
-router.post("/add-medication/:member_id", async (req, res) => {
+router.post("/add-medication", async (req, res) => {
   let medicineName = req.body.medicineName;
-  let member_id=req.params.member_id
+  let member_id = req.params.member_id;
   let medDescription = req.body.medDescription;
   let medFrequency = req.body.medFrequency;
   console.log(medicineName);
@@ -34,9 +31,8 @@ router.post("/add-medication/:member_id", async (req, res) => {
     medImageUrl: uniqueFilename,
     medDescription: medDescription,
     medFrequency: medFrequency,
-    member_id:member_id
+    //member_id: req.session.memberInfo.id
   });
-  console.log(member_id)
   let persistedMedication = await medication.save();
   if (persistedMedication != null) {
     res.redirect("/medications");
@@ -64,9 +60,9 @@ router.post("/edit-medication/:id", async (req, res) => {
       medDescription: medDescription,
       medFrequency: medFrequency
     },
-    { where: {id: id},  }
+    { where: { id: id } }
   );
-  res.redirect("/medications");
+  res.render("medication");
 });
 //delete medication
 router.post("/delete-medicine", async (req, res) => {
@@ -97,12 +93,12 @@ function uploadFile(req, callback) {
       callback(file.name);
     });
 }
-router.post("/upload/:member_id", (req, res) => {
-  let member_id= req.params.member_id
+router.post("/upload/:memberId", (req, res) => {
+  let member_id = req.params.memberId;
   uploadFile(req, photoURL => {
     photoURL = `/uploads/${photoURL}`;
     res.render("add-medication", {
-     member_id: member_id,
+      member_id: member_id,
       medImageUrl: photoURL,
       className: "medication-preview-image"
     });
