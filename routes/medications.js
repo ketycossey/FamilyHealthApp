@@ -8,7 +8,6 @@ const fs = require("fs");
 let uniqueFilename = "";
 
 router.get("/", (req, res) => {
-  console.log(req.session.memberInfo.id)
   models.Medication.findAll().then(medications =>
     res.render("medication", { medications: medications })
   

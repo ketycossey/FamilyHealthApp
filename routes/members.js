@@ -1,9 +1,12 @@
 const express = require("express");
 const getMember = require("../functions/member");
 const router = express.Router();
-const uuidv1= require("uuid/v1")
-const formidable = require("formidable")
-const fs=require("fs")
+const uuidv1 = require("uuid/v1");
+const formidable = require("formidable");
+const fs = require("fs");
+const models = require("../models");
+
+let uniqueFilename = "";
 
 router.get("/", (req, res) => {
   // const members = req.session.familyAll.family_members
@@ -20,6 +23,14 @@ router.get("/", (req, res) => {
       name: req.session.family.family_name
     });
   });
+});
+
+router.get("/:id", (req, res) => {
+  const member = req.session.familyAll.family_members;
+  const name = req.session.familyAll.family_name;
+  //   res.render("members", {members: members, name: name})
+  let member_id = req.params.id;
+  res.render("member", { member: member, name: name, member_id: member_id });
 });
 
 //<localhost>:<port>/members/add/<family_id>
@@ -82,6 +93,7 @@ router.post("/delete/:memberId", (req, res) => {
 
 router.post("/member", async (req, res) => {
   const member_id = req.body.member_id;
+  const image_url = req.body.image_url;
   req.session.memberInfo = await getMember(member_id);
   console.log(req.session.memberInfo);
   res.render("member", { member: req.session.memberInfo });
@@ -99,12 +111,13 @@ function uploadFile(req, callback) {
       callback(file.name);
     });
 }
-router.post("/member/upload/:member_id", (req, res) => {
-  let member_id = req.params.member_id;
+router.post("/upload/:memberId", (req, res) => {
+  let memberId = req.params.memberId;
+  let image_url = req.body.image_url;
   uploadFile(req, photoURL => {
     photoURL = `/uploads/${photoURL}`;
-    res.render("member", {
-      member_id: member_id,
+    res.render("members", {
+      memberId: memberId,
       image_url: photoURL,
       className: "preview-image"
     });

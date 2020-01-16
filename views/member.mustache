@@ -1,24 +1,20 @@
-<html>
-
+<!doctype html>
+<html lang="en">
 <body>
 
 {{#member}}
 {{first_name}}
-   <form action="member/upload/{{id}}" method="POST" enctype="multipart/form-data">
-  <label>Photo</label>
-    <input type="file" name="photo" />
-    <button type='submit'>Upload</button>
-    </form>
-   <div>
-   <img src="/uploads/{{image_url}}" class="{{className}}">
-  </div>
 
-<<<<<<< HEAD
-    <form action="/careproviders" method="POST">
-    <input name="member_id" type="hidden" value="{{id}}"/>
-=======
+  <form action="/members/upload/{{id}}" method="POST" enctype="multipart/form-data">
+        <label>Photo</label>
+        <input type="file" name="photo"/>
+        <button type="submit">Upload</button>
+  </form>
+
+      <img src="{{image_url}}" class="{{className}}" />
+  
+
 <form action="/careproviders" method="GET">
->>>>>>> master
     <button>Care Providers</button>
 </form>
 
@@ -37,4 +33,4 @@
 {{/member}}
 </body>
 
-</html>
+</!doctype>
