@@ -6,25 +6,26 @@
   {{> navbar}}
   
 <div class = "container">
-  
+  <h1> INSURANCE PAGE </h1>
   <div class = "list-group">
     <ul>
     {{#insurance}}
     <div>
-      <img src="/uploads/{{imageURL}}" class="labresult-preview-image" />
+      <img src="/uploads/{{front_pic}}" class="labresult-preview-image" />
+      <img src="/uploads/{{back_pic}}" class="labresult-preview-image" />
     </div>
     <div class = "d-flex w-100 justify-content-between">
-      <h4 class="mb-1">{{category}}</h4>
+      <h4 class="mb-1">{{care_provider_name}}</h4>
     </div>
-    <p class="mb-1">{{test_date}}</p>
     
     <form action = "/labresults/delete-labresult" method="POST">
-      <input type="hidden" name= "imageURL" value="{{imageURL}}" />
-      <input type="hidden" name="labresultId" value="{{id}}" />
+      <input type="hidden" name= "front_pic" value="{{front_pic}}" />
+      <input type="hidden" name="back_pic" value="{{back_pic}}" />
+      <input type="hidden" name="insurance_id" value="{{id}}" />
       <button type="submit" class = "btn btn-danger">Delete</button>
     </form>
   
-   <a href="/labresults/edit/{{id}}"><button class="btn btn-info">Edit</button></a>
+   <a href="/insurance/edit/{{id}}"><button class="btn btn-info">Edit</button></a>
   
    {{/insurance}}
 

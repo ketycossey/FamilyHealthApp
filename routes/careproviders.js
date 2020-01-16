@@ -1,6 +1,4 @@
 const express = require("express")
-const getMember = require("../functions/member")
-
 const router = express.Router()
 
 router.get("/", (req, res) => {

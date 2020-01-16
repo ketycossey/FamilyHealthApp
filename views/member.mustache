@@ -9,15 +9,16 @@
     <button>Care Providers</button>
 </form>
 
-<form action="/medications" method="GET">
-    <input name="member_id" type="hidden" value="{{id}}"/>
-    <button>Medications</button>
-</form>
+
+<a href="/insurance">
+    <button type="submit">Insurance</button>
+</a>
 
 <form action="/medications" method="GET">
     <input name="member_id" type="hidden" value="{{id}}"/>
     <button>Medications</button>
 </form>
+
 {{/member}}
 </body>
 
