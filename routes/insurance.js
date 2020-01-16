@@ -5,15 +5,22 @@ const uuidv1 = require('uuid/v1')
 const models = require('../models')
 const fs = require('fs')
 var multer = require('multer')
+let photo1 = ''
+let photo2 = ''
 var storage = multer.diskStorage({
   destination: function(req, file, cb){
-    cb(null, file.originalname)
+    cb(null, './uploads/')
+  },
+  filename: function(req, file, cb){
+    cb(null, Date.now() + file.originalname)
   }
 })
-var upload = multer({storage: storage}).fields([
-  {name:'photo1'},
-  {name: 'photo2'}
-])
+
+var upload = multer({storage: storage})
+// .fields([
+//   {name:'photo1'},
+//   {name: 'photo2'}
+// ])
 
 //let uniqueFilename1 = ''
 //let uniqueFilename2 = ''
@@ -32,35 +39,29 @@ router.get('/add-insurance', (req, res) => {
 })
 
 
-router.post('/upload', (req, res,next) => {
-  upload(req, res, function(err){
-    if(err){
-      console.log(err)
-    } else {
-      console.log(req.files)
-      res.render('add-insurance')
-    }
-  })
+router.post('/upload', upload.any() ,(req, res,next) => {
+  photo1 = req.files[0].filename
+  photo2 = req.files[1].filename
+  let photo1URL = `/uploads/${photo1}`
+  let photo2URL = `/uploads/${photo2}`
   
-  
-//   uploadFile1(req, (photoURL1, photoURL2) => {
-//     photoURL1 = `/uploads/${photoURL1}`
-//     photoURL2 = `/uploads/${photoURL1}`
-//     res.render('add-insurance', {imageURLback: photoURL2, imageURLfront: photoURL1, className: 'labresult-preview-image'})
-// })
+  res.render('add-insurance', {imageURLfront: photo1URL, imageURLback: photo2URL, className: 'labresult-preview-image' })
 })
 
-// router.post('/upload2', (req, res) => {
-//   uploadFile1(req, (photoURL) => {
-//     photoURL = `/uploads/${photoURL}`
-//     res.render('add-insurance', {imageURLback: photoURL, className: 'labresult-preview-image'})
-//   })
-// })
-
-
-router.post('/add-insurance', (req, res) => {
-
-  
+router.post('/add-insurance', async (req, res) => {
+  let careprovider = req.body.careprovider
+  let insurance = models.Insurance.build({
+    care_provider_name: careprovider,
+    member_id: req.session.memberInfo.id,
+    front_pic: photo1,
+    back_pic: photo2
+  })
+  let persistedInsurance = await insurance.save()
+  if(persistedInsurance != null ){
+    res.redirect('/insurance')
+  } else {
+    res.render('add-insurance', {message: 'Unable to add insurance'})
+  }
 })
 
 module.exports = router
