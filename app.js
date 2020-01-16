@@ -14,11 +14,8 @@ const loginRouter = require('./routes/login')
 const labresultsRouter = require('./routes/testlabs')
 const notesRouter = require('./routes/notes')
 const insuranceRouter = require('./routes/insurance')
-<<<<<<< HEAD
-const aboutRouter = require('./routes/about')
-=======
 const appointmentsRouter = require('./routes/appointments')
->>>>>>> master
+const aboutRouter = require('./routes/about')
 
 const profileRouter = require('./routes/profile')
 
@@ -68,11 +65,8 @@ app.use('/members', checkAuthorization, membersRouter)
 app.use('/medications',checkAuthorization, medicationRouter)
 app.use('/profile', profileRouter)
 app.use('/notes', notesRouter)
-<<<<<<< HEAD
-app.use('/about', aboutRouter)
-=======
 app.use('/appointment', appointmentsRouter)
->>>>>>> master
+app.use('/about', aboutRouter)
 
 app.listen(PORT, ()=>{
     console.log("Server is running...")
