@@ -5,35 +5,20 @@
  {{> navbar}}
  
 {{#member}}
-{{first_name}}
+
 <div class="container">
-{{> dashboard}}
-</div>
-  <form action="/members/upload/{{id}}" method="POST" enctype="multipart/form-data">
+<h1 class="text-center">{{first_name}}</h1>
+<br>
+ <form action="/members/upload/{{id}}" method="POST" enctype="multipart/form-data">
         <label>Photo</label>
         <input type="file" name="photo"/>
         <button type="submit">Upload</button>
   </form>
-
+  <br>
+  <br>
+{{> dashboard}}
+</div>
  
-  
-
-<form action="/careproviders" method="GET">
-    <button type="submit">Care Providers</button>
-</form>
-
-<a href="/labresults">
-    <button type="submit">Lab Results</button>
-</a><br>
-<a href="/insurance">
-    <button type="submit">Insurance</button>
-</a>
-
-<form action="/medications" method="GET">
-    <input name="member_id" type="hidden" value="{{id}}"/>
-    <button type="submit">Medications</button>
-</form>
-
 {{/member}}
  {{> footer}}
 </body>
