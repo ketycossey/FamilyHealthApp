@@ -48,6 +48,7 @@ app.use('/css', express.static('css'))
 // changed the public static folder
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: false}))
+
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views',VIEWS_PATH)
 app.set('view engine', 'mustache')
