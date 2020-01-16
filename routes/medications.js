@@ -82,10 +82,11 @@ router.post("/delete-medicine", async (req, res) => {
   }); 
   const updatedMedicine = req.session.memberInfo.Medication.filter(medicine => medicine.id != medicineId)
   req.session.memberInfo.Medication = updatedMedicine
+  
   if (result) {
-    console.log("this is sparta" + medImageUrl);
+    //console.log("this is sparta" + medImageUrl);
     fs.unlinkSync(`${__basedir}/uploads/${medImageUrl}`);
-    console.log(result);
+    //console.log(result);
   }
   res.redirect("/medications");
 });

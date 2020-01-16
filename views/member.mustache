@@ -1,21 +1,25 @@
 <!doctype html>
 <html lang="en">
+{{> head}}
 <body>
-
+ {{> navbar}}
+ 
 {{#member}}
 {{first_name}}
-
+<div class="container">
+{{> dashboard}}
+</div>
   <form action="/members/upload/{{id}}" method="POST" enctype="multipart/form-data">
         <label>Photo</label>
         <input type="file" name="photo"/>
         <button type="submit">Upload</button>
   </form>
 
-      <img src="{{image_url}}" class="{{className}}" />
+ 
   
 
 <form action="/careproviders" method="GET">
-    <button>Care Providers</button>
+    <button type="submit">Care Providers</button>
 </form>
 
 <a href="/labresults">
@@ -25,14 +29,11 @@
     <button type="submit">Insurance</button>
 </a>
 
-
-
 <form action="/medications" method="GET">
     <input name="member_id" type="hidden" value="{{id}}"/>
-    <button>Medications</button>
+    <button type="submit">Medications</button>
 </form>
 
 {{/member}}
+ {{> footer}}
 </body>
-
-</!doctype>

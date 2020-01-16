@@ -6,37 +6,37 @@
   <body>
   
   {{> navbar}}
-<div class="container-fluid">
+<div id="Bg">   
+<div id="membersContainer" class="container-fluid">
     <div class="col-8 offset-2">
 
 
 <form method="POST" action="/members/update/{{id}}">
 
     <h5> <b>Updating: </b> {{name}}</h5>
-
     <div class="form-group">
         <label for="exampleInputEmail1">Relationship</label>
-        <input type="text" name="family_member" class="form-control">
+        <input type="text" name="family_member" value="{{updatemember.family_member}}" class="form-control">
     </div>
 
     <div class="form-group">
       <label for="exampleInputEmail1">First Name</label>
-      <input type="text" name="first_name" class="form-control">
+      <input type="text" name="first_name" value="{{updatemember.first_name}}" class="form-control">
     </div>
 
     <div class="form-group">
       <label for="exampleInputPassword1">Last Name</label>
-      <input type="text" name="last_name" class="form-control">
+      <input type="text" name="last_name" value="{{updatemember.last_name}}" class="form-control">
     </div>
     
     <div class="form-group">
       <label for="exampleInputPassword1">Birthday</label>
-      <input type="text" name="birthday" class="form-control">
+      <input type="text" name="birthday" value="{{updatemember.birthday}}" class="form-control">
     </div>
 
-<button class="btn btn-light">Update</button>
+<button class="btn btn-primary">Update</button>
 </form>
-
+</div>
 </body>
  {{> footer}}
 </html>

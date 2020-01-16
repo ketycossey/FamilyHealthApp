@@ -6,12 +6,12 @@
   <body>
 
 {{> navbar}}
-
-<div class="container-fluid p-3">
+<div id="Bg">
+<div id="membersContainer" class="container-fluid p-3">
 
     <div class="row">
 <div class="col-lg-8 offset-lg-2 text-right">
-<h5 class="display-5 text-p text-left">Hello, {{name}}
+<h5 id="hello" class="display-5 text-p text-left">Hello, {{name}}
 <a href="./members/add" class="float-right text-success"><i class="material-icons">person_add</i></a>
 <a href="./notes" class="float-right text-primary"><i class="material-icons">note_add</i></a>
 </h5>
@@ -24,15 +24,12 @@
 
 
 <div class="dropdown dropright float-right">
-    <button type="button" class="btn btn-light text-p dropdown-toggle" data-toggle="dropdown">
+    <button  type="button" class="btn btn-light text-p dropdown-toggle" data-toggle="dropdown">
       Actions
     </button>
     <div class="dropdown-menu">
-      <form action="/members/{{id}}" method="POST">
-        <input name="member_id" type="hidden" value="{{id}}"/>
-        <a class="dropdown-item" href="/members/{{id}}">View Profile</a>
-      </form>
-      <a class="dropdown-item" href="/members/update/{{id}}">Update</a>
+      <a  class="dropdown-item" href="/members/member/{{id}}">View Profile</a>
+      <a  class="dropdown-item" href="/members/update/{{id}}">Update</a>
       <form action="/members/delete/{{id}}" method="POST">
         <a class="dropdown-item" href="/members/delete/{{id}}">Delete</a>
       </form>
@@ -56,7 +53,7 @@
 </div>
 
 
-
+</div>
 </body>
  {{> footer}}
 </html>
