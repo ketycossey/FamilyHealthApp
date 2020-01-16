@@ -9,15 +9,12 @@ const models = require("../models");
 let uniqueFilename = "";
 
 router.get("/", (req, res) => {
-  // const members = req.session.familyAll.family_members
-  // const name = req.session.familyAll.family_name
-  // res.render("members", {members: members, name: name})
   models.Family_member.findAll({
     where: {
       family_id: req.session.family.userId
     }
   }).then(members => {
-    //console.log(members)
+    req.session.familyAll.family_members = members
     res.render("members", {
       members: members,
       name: req.session.family.family_name
@@ -34,19 +31,20 @@ router.post("/add", (req, res) => {
     birthday: req.body.birthday,
     family_id: req.session.family.userId
   });
-  member.save().then(savedMember => res.redirect("/members") /*console.log(savedMember)*/);
-//   res.redirect("/members");
+  member.save().then(savedMember => res.redirect("/members"));
 });
 
 router.get("/update/:member", (req, res) => {
-  let member = models.Family_member.findAll({
+  models.Family_member.findAll({
     where: {
       id: req.params.member
     }
   }).then(member => {
+      let updatemember = req.session.familyAll.family_members.filter(member => member.id == req.params.member)
     res.render("update", {
       id: req.params.member,
-      name: member[0].dataValues.first_name
+      name: member[0].dataValues.first_name,
+      updatemember: updatemember[0]
     });
   });
 });
@@ -57,7 +55,7 @@ router.get("/add", (req, res) => {
 
 //<Localhost>:<port>/members/update/<memberId>
 router.post("/update/:memberId", (req, res) => {
-  let member = models.Family_member.update(
+    models.Family_member.update(
     {
       image_url: req.body.image_url,
       family_member: req.body.family_member,
@@ -70,7 +68,7 @@ router.post("/update/:memberId", (req, res) => {
         id: req.params.memberId
       }
     }
-  ).then(res.redirect("/members"));
+  ).then(() => res.redirect("/members"));
 });
 
 //<Localhost>:<port>/members/delete/<memberId>
@@ -82,13 +80,6 @@ router.get("/delete/:memberId", (req, res) => {
   }).then(res.redirect("/members"));
 });
 
-// router.post("/member", async (req, res) => {
-//   const member_id = req.body.member_id;
-//   const image_url = req.body.image_url;
-//   req.session.memberInfo = await getMember(member_id);
-//   console.log(req.session.memberInfo);
-//   res.render("member", { member: req.session.memberInfo });
-// });
 //Kety Worked?? from here
 function uploadFile(req, callback) {
   new formidable.IncomingForm()
