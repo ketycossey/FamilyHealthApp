@@ -4,6 +4,7 @@
     margin:0 !important;  
     background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
     background-size: cover;
+    background-position: center;
     height: 100vh;
 }
 #logContainer{
@@ -29,7 +30,7 @@
 }
 #logo{
     position: relative;
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 #labels{

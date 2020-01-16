@@ -9,7 +9,13 @@
 #Bg{
     margin:0 !important;  
     background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
+    background-position: center;
     background-size: cover;
     height: 100vh;
 }
 
+#membersContainer{
+    background-color: rgb(246, 248, 249);
+    height: auto;
+    width: 80%;
+}
