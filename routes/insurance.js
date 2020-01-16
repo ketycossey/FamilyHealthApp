@@ -50,7 +50,6 @@ router.post('/add-insurance', async (req, res) => {
     front_pic: photo1,
     back_pic: photo2
   })
-  
   let persistedInsurance = await insurance.save()
   if(persistedInsurance != null ){
     res.redirect('/insurance')

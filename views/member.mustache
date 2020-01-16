@@ -11,11 +11,11 @@
         <button type="submit">Upload</button>
   </form>
 
-      <img src="{{image_url}}" class="{{className}}" />
+ 
   
 
 <form action="/careproviders" method="GET">
-    <button>Care Providers</button>
+    <button type="submit">Care Providers</button>
 </form>
 
 <a href="/labresults">
@@ -25,11 +25,9 @@
     <button type="submit">Insurance</button>
 </a>
 
-
-
 <form action="/medications" method="GET">
     <input name="member_id" type="hidden" value="{{id}}"/>
-    <button>Medications</button>
+    <button type="submit">Medications</button>
 </form>
 
 {{/member}}

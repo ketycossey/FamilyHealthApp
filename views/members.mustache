@@ -28,10 +28,7 @@
       Actions
     </button>
     <div class="dropdown-menu">
-      <form action="/members/{{id}}" method="POST">
-        <input name="member_id" type="hidden" value="{{id}}"/>
-        <a class="dropdown-item" href="/members/{{id}}">View Profile</a>
-      </form>
+      <a class="dropdown-item" href="/members/member/{{id}}">View Profile</a>
       <a class="dropdown-item" href="/members/update/{{id}}">Update</a>
       <form action="/members/delete/{{id}}" method="POST">
         <a class="dropdown-item" href="/members/delete/{{id}}">Delete</a>

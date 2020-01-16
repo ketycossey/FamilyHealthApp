@@ -24,10 +24,8 @@ router.get("/", (req, res) => {
     });
   });
 });
-
-
 //<localhost>:<port>/members/add/<family_id>
-router.post("/add/", (req, res) => {
+router.post("/add", (req, res) => {
   let member = models.Family_member.build({
     image_url: req.body.image_url,
     family_member: req.body.family_member,
@@ -36,8 +34,8 @@ router.post("/add/", (req, res) => {
     birthday: req.body.birthday,
     family_id: req.session.family.userId
   });
-  member.save().then(savedMember => console.log(savedMember));
-  res.redirect("/members");
+  member.save().then(savedMember => res.redirect("/members") /*console.log(savedMember)*/);
+//   res.redirect("/members");
 });
 
 router.get("/update/:member", (req, res) => {
@@ -76,21 +74,21 @@ router.post("/update/:memberId", (req, res) => {
 });
 
 //<Localhost>:<port>/members/delete/<memberId>
-router.post("/delete/:memberId", (req, res) => {
-  let member = models.Family_member.destroy({
+router.get("/delete/:memberId", (req, res) => {
+  models.Family_member.destroy({
     where: {
       id: req.params.memberId
     }
   }).then(res.redirect("/members"));
 });
 
-router.post("/member", async (req, res) => {
-  const member_id = req.body.member_id;
-  const image_url = req.body.image_url;
-  req.session.memberInfo = await getMember(member_id);
-  console.log(req.session.memberInfo);
-  res.render("member", { member: req.session.memberInfo });
-});
+// router.post("/member", async (req, res) => {
+//   const member_id = req.body.member_id;
+//   const image_url = req.body.image_url;
+//   req.session.memberInfo = await getMember(member_id);
+//   console.log(req.session.memberInfo);
+//   res.render("member", { member: req.session.memberInfo });
+// });
 //Kety Worked?? from here
 function uploadFile(req, callback) {
   new formidable.IncomingForm()
@@ -117,10 +115,11 @@ router.post("/upload/:memberId", (req, res) => {
   });
 });
 
-router.get("/:id", async (req, res) => {
-  const member_id = req.params.id
-  req.session.memberInfo = await getMember(member_id)
-  res.render("member", {member: req.session.memberInfo})
+router.get("/member/:id", async (req, res) => {
+    const member_id = req.params.id
+    req.session.memberInfo = await getMember(member_id)
+    res.render("member", {member: req.session.memberInfo})
+
 })
 
 module.exports = router;
