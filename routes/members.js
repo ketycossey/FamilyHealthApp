@@ -24,14 +24,11 @@ router.get("/", (req, res) => {
     });
   });
 });
-
-router.get("/:id", (req, res) => {
-  const member = req.session.familyAll.family_members;
-  const name = req.session.familyAll.family_name;
-  //   res.render("members", {members: members, name: name})
-  let member_id = req.params.id;
-  res.render("member", { member: member, name: name, member_id: member_id });
-});
+router.get("/:id", async (req, res) => {
+  const member_id = req.params.id
+  req.session.memberInfo = await getMember(member_id)
+  res.render("member", {member: req.session.memberInfo})
+})
 
 //<localhost>:<port>/members/add/<family_id>
 router.post("/add/", (req, res) => {
