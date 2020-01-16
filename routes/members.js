@@ -24,14 +24,9 @@ router.get("/", (req, res) => {
     });
   });
 });
-router.get("/:id", async (req, res) => {
-  const member_id = req.params.id
-  req.session.memberInfo = await getMember(member_id)
-  res.render("member", {member: req.session.memberInfo})
-})
 
 //<localhost>:<port>/members/add/<family_id>
-router.post("/add/", (req, res) => {
+router.post("/add", (req, res) => {
   let member = models.Family_member.build({
     image_url: req.body.image_url,
     family_member: req.body.family_member,
@@ -40,8 +35,8 @@ router.post("/add/", (req, res) => {
     birthday: req.body.birthday,
     family_id: req.session.family.userId
   });
-  member.save().then(savedMember => console.log(savedMember));
-  res.redirect("/members");
+  member.save().then(savedMember => res.redirect("/members") /*console.log(savedMember)*/);
+//   res.redirect("/members");
 });
 
 router.get("/update/:member", (req, res) => {
@@ -120,5 +115,11 @@ router.post("/upload/:memberId", (req, res) => {
     });
   });
 });
+
+router.get("/member/:id", async (req, res) => {
+    const member_id = req.params.id
+    req.session.memberInfo = await getMember(member_id)
+    res.render("member", {member: req.session.memberInfo})
+})
 
 module.exports = router;
