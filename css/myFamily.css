@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam&display=swap');
+
+#signout{
+    color:#29c2e5; 
+}
+
+.navbar-nav{
+    float: left;
+}
+#paper{
+    background-image: url("https://i.ibb.co/NxRWTVj/paper.png");
+    background-position:right ;
+    background-size: cover;
+    width: 90%;
+    height: 30%;
+}
+#Bg{
+    margin:0 !important;  
+    background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+#membersContainer{
+    background-color: rgb(246, 248, 249);
+    height: auto;
+    width: 80%;
+}
+#hello{
+    color: #26304e;
+}
+#topics{
+    color: #29c2e5; 
+    ;
+}
+#writenNote{
+    font-family: 'Kalam', cursive;
+}
+#notesContainer{
+    background-color: rgb(246, 248, 249);
+    height: auto;
+    width: 80%;
+
+}

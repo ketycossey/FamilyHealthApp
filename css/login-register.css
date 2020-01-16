@@ -4,10 +4,11 @@
     margin:0 !important;  
     background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
     background-size: cover;
+    background-position: center;
     height: 100vh;
 }
 #logContainer{
-    margin-top: 30%;
+    /* margin-top: 30%; */
     width: 70vw;
     padding: 5%;
     background-color:rgb(246, 248, 249);
@@ -29,7 +30,7 @@
 }
 #logo{
     position: relative;
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 #labels{
@@ -37,9 +38,10 @@
 }
 
 @media screen and (min-width: 800px){
-    #logContainer{
+   
+    /* #logContainer{
         margin-top: 10%;
-    }
+    } */
     #logo{
         left: 60px;
         position: relative;
@@ -47,5 +49,7 @@
         height: auto;
     
     }
-        
+    #loginBg{
+     background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");   
+    }   
 }
