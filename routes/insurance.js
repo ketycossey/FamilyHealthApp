@@ -17,13 +17,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({storage: storage})
-// .fields([
-//   {name:'photo1'},
-//   {name: 'photo2'}
-// ])
-
-//let uniqueFilename1 = ''
-//let uniqueFilename2 = ''
+console.log("I am the upload function:  " + upload)
 
 router.get('/', async (req, res) => {
   let insurance = await models.Insurance.findAll({
@@ -63,6 +57,59 @@ router.post('/add-insurance', async (req, res) => {
   } else {
     res.render('add-insurance', {message: 'Unable to add insurance'})
   }
+})
+
+router.get('/edit/:insuranceId', async (req, res) => {
+  let insuranceId = req.params.insuranceId
+  let insurance = await models.Insurance.findByPk(insuranceId)
+  res.render('insurance-edit', insurance.dataValues)
+})
+
+router.post('/upload/edit/:insuranceId', upload.any(), async(req,res) => {
+  photo1 = req.files[0].filename
+  photo2 = req.files[1].filename
+  let insuranceId = parseInt(req.params.insuranceId)
+  let insuranceresult = await models.Insurance.findByPk(insuranceId)
+  
+  let response = insuranceresult.dataValues
+  response.front_pic = photo1
+  response.back_pic = photo2
+  
+  res.render('insurance-edit', response)
+})
+
+router.post('/update-insurance', async (req, res) => {
+  const insuranceId = req.body.insuranceId
+  const careprovider = req.body.careprovider
+  
+  await models.Insurance.update({
+    care_provider_name: careprovider,
+    front_pic: photo1,
+    back_pic: photo2
+  }, {
+    where: {
+      id: insuranceId
+    }
+  })
+  res.redirect('/insurance')
+})
+
+router.post('/delete-insurance', async(req, res) => {
+  let insuranceId = parseInt(req.body.insurance_id)
+  let front_pic = req.body.front_pic
+  let back_pic = req.body.back_pic
+  let result = await models.Insurance.destroy({
+    where: {
+      id: insuranceId
+    }
+  })
+  
+  if(result) {
+    fs.unlinkSync(`${__basedir}/uploads/${front_pic}`)
+    fs.unlinkSync(`${__basedir}/uploads/${back_pic}`)
+  }
+  
+  res.redirect('/insurance')
 })
 
 module.exports = router

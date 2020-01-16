@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+ {{> head}}
+  <body>
+  
+  {{> navbar}}
+  
+  <div class = "container">
+  <h1> Edit Insurance </h1>
+    <form action="/insurance/upload/edit/{{id}}" method="POST" enctype="multipart/form-data">
+      <label> Front Picture </label>
+      <input type="file" name="photo1">
+      <label> Back Picture </label>
+      <input type="file" name="photo2">
+      <button type="submit"> Upload </button>
+    </form>
+    
+    <img src='/uploads/{{front_pic}}' class="editsizing">
+    <img src='/uploads/{{back_pic}}' class="editsizing">
+    
+    <form action="/insurance/update-insurance" method = "POST">
+      <input type="hidden" name="insuranceId" value={{id}} />
+      <input type="hidden" name="memberId" value={{member_id}} />
+      <div class = "form-group">
+        <label> Care Provider Name</label>
+        <input type="text" name="careprovider" value="{{care_provider_name}}" class="form-control" placeholder = "Enter Care Provider Name" />
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    
+    <div>
+      {{#message}}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+      {{/message}}
+    </div>
+    
+    
+  </div>
+  {{> footer}}
+  </body>
+</html>
