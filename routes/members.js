@@ -74,7 +74,8 @@ router.post("/update/:memberId", (req, res) => {
 });
 
 //<Localhost>:<port>/members/delete/<memberId>
-router.post("/delete/:memberId", (req, res) => {
+router.post("/delete/:memberId", async (req, res) => {
+  let memberId = parseInt(req.body.memberId)
   let member = models.Family_member.destroy({
     where: {
       id: req.params.memberId
