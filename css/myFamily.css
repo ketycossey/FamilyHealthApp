@@ -16,7 +16,7 @@
 }
 #Bg{
     margin:0 !important;  
-    background-image: url("https://i.ibb.co/sjr0YYS/webLarge.png");
+    background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
     background-position: center;
     background-size: cover;
     height: 100vh;
@@ -36,4 +36,10 @@
 }
 #writenNote{
     font-family: 'Kalam', cursive;
+}
+#notesContainer{
+    background-color: rgb(246, 248, 249);
+    height: auto;
+    width: 80%;
+
 }
