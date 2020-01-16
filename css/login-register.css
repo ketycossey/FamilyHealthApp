@@ -2,7 +2,7 @@
 
 #loginBg{
     margin:0 !important;  
-    background-image: url("https://i.ibb.co/bRhwj9Y/WEB-BG.png");
+    background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
     background-size: cover;
     height: 100vh;
 }
@@ -17,6 +17,7 @@
     width: 70vw;
     padding: 5%;
     background-color:rgb(246, 248, 249);
+    box-shadow: 2px 3px 2px #acacac;
 }
 #buttons{
     background-color: #29c2e5;
