@@ -24,7 +24,6 @@ router.get("/", (req, res) => {
     });
   });
 });
-
 //<localhost>:<port>/members/add/<family_id>
 router.post("/add", (req, res) => {
   let member = models.Family_member.build({
@@ -120,6 +119,7 @@ router.get("/member/:id", async (req, res) => {
     const member_id = req.params.id
     req.session.memberInfo = await getMember(member_id)
     res.render("member", {member: req.session.memberInfo})
+
 })
 
 module.exports = router;
