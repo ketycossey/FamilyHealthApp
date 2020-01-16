@@ -29,7 +29,6 @@ router.get("/:id", async (req, res) => {
   req.session.memberInfo = await getMember(member_id)
   res.render("member", {member: req.session.memberInfo})
 })
-
 //<localhost>:<port>/members/add/<family_id>
 router.post("/add/", (req, res) => {
   let member = models.Family_member.build({

@@ -4,4 +4,9 @@
 .medication-preview-image{
   width:200px;
 }
-
+#loginBg{
+  margin:0 !important;  
+  background-image: url("https://i.ibb.co/yyZKTsr/BG-WEB.png");
+  background-size: cover;
+  height: 100vh;
+}

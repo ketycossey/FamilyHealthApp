@@ -36,6 +36,14 @@
     color: #26304e;
 }
 
+#aboutContainer{
+    margin-top: 5%;
+    width: 40vw;
+    padding: 5%;
+    background-color:rgb(246, 248, 249);
+    box-shadow: 2px 3px 2px #7d7c7c;
+}
+
 @media screen and (min-width: 800px){
     #logContainer{
         margin-top: 10%;
