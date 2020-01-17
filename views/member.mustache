@@ -3,17 +3,15 @@
 {{> head}}
 <body>
  {{> navbar}}
- 
 {{#member}}
-{{! hi }}
+
+      <li class="nav-item">
+        <a href="/members/member/{{id}}"> 
+          <button class="btn btn-light">My DashBoard</button>
+        </a>
+      </li>
 <div class="container">
 <h1 class="text-center">{{first_name}}</h1>
-<br>
- <form action="/members/upload/{{id}}" method="POST" enctype="multipart/form-data">
-        <label>Photo</label>
-        <input type="file" name="photo"/>
-        <button type="submit">Upload</button>
-  </form>
   <br>
   <br>
 {{> dashboard}}
